@@ -1,0 +1,16 @@
+version: '3.4'
+
+services:
+
+  db:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+
+  fischquizapi:
+    image: ${DOCKER_REGISTRY-}fischquizapi
+    build:
+      context: .
+      dockerfile: Dockerfile
