@@ -24,7 +24,7 @@ jobs:
 
     - name: Restore dependencies
       run: dotnet restore
-      working-directory: api/FischQuizAPI/FischQuizAPI.sln
+      working-directory: api/FischQuizAPI
 
     - name: Build
       run: dotnet build --no-restore
