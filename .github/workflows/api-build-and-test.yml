@@ -23,13 +23,11 @@ jobs:
         dotnet-version: 6.0.x
 
     - name: Restore dependencies
-      run: dotnet restore
-      working-directory: api/FischQuizAPI
+      run: dotnet restore api/FischQuizAPI/FischQuizAPI.sln
 
     - name: Build
       run: dotnet build --no-restore
-      working-directory: api/FischQuizAPI/FischQuizAPI.sln
 
     - name: Test
       run: dotnet test --no-build --verbosity normal
-      working-directory: api/FischQuizAPI.Tests/FischQuizAPI.Tests.csproj
+      working-directory: api/FischQuizAPI.Tests
