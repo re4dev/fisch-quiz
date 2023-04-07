@@ -48,5 +48,43 @@ namespace FischQuizAPI.Controllers
             }
         }
 
+        [HttpPost("Register")]
+        public async Task<ActionResult> Register(UserDto request)
+        {
+            try
+            {
+                using (_context)
+                {
+                    if (await _context.Users.AnyAsync(x => x.Username == request.Username))
+                    {
+                        return BadRequest("Username already in use!");
+                    }
+
+                    User newUser = new();
+
+                    newUser.Username = request.Username;
+                    newUser.Password = request.Password;
+
+                    await _context.Users.AddAsync(newUser);
+
+                    try
+                    {
+                        await _context.SaveChangesAsync();
+                    }
+                    catch (Exception e)
+                    {
+                        throw new Exception(e.Message);
+                    }
+
+                    return Ok();
+
+                }
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
     }
 }
