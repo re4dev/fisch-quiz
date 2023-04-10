@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FischQuizAPI.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230405195425_Initial")]
+    [Migration("20230410170833_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -42,9 +42,17 @@ namespace FischQuizAPI.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("Password")
+                    b.Property<string>("UserMail")
                         .IsRequired()
                         .HasColumnType("longtext");
+
+                    b.Property<byte[]>("UserPasswordHash")
+                        .IsRequired()
+                        .HasColumnType("longblob");
+
+                    b.Property<byte[]>("UserPasswordSalt")
+                        .IsRequired()
+                        .HasColumnType("longblob");
 
                     b.Property<string>("Username")
                         .IsRequired()

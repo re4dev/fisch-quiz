@@ -2,11 +2,14 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using System.Security.Cryptography;
 
 namespace FischQuizAPI.Tests
 {
     public class UserControllerTests
     {
+        private readonly IConfiguration configuration;
 
         [Fact]
         public async Task TestLoginWithCorrectCredentials()
@@ -15,19 +18,30 @@ namespace FischQuizAPI.Tests
                 .UseInMemoryDatabase(databaseName: "TestDatabaseTest1")
                 .Options;
 
+            byte[] salt;
+            byte[] hash;
+
+            using (var hmc = new HMACSHA512())
+            {
+                salt = hmc.Key;
+                hash = hmc.ComputeHash(System.Text.Encoding.UTF8.GetBytes("testpassword"));
+            }
+
             // Arrange
             using (var context = new AppDbContext(options))
             {
                 var user = new User
                 {
                     Username = "testuser",
-                    Password = "testpassword"
+                    UserMail = "test@test.de",
+                    UserPasswordSalt = salt,
+                    UserPasswordHash = hash
                 };
 
                 context.Users.Add(user);
                 await context.SaveChangesAsync();
 
-                var controller = new UserController(context);
+                var controller = new UserController(context, configuration);
 
                 // Act
                 var request = new UserDto
@@ -52,19 +66,30 @@ namespace FischQuizAPI.Tests
             var options = new DbContextOptionsBuilder<AppDbContext>()
                 .UseInMemoryDatabase(databaseName: "TestDatabaseTest2")
                 .Options;
+            byte[] salt;
+            byte[] hash;
+
+            using (var hmc = new HMACSHA512())
+            {
+                salt = hmc.Key;
+                hash = hmc.ComputeHash(System.Text.Encoding.UTF8.GetBytes("testpassword"));
+            }
+
             // Arrange
             using (var context = new AppDbContext(options))
             {
                 var user = new User
                 {
                     Username = "testuser",
-                    Password = "testpassword"
+                    UserMail = "test@test.de",
+                    UserPasswordSalt = salt,
+                    UserPasswordHash = hash
                 };
 
                 context.Users.Add(user);
                 await context.SaveChangesAsync();
 
-                var controller = new UserController(context);
+                var controller = new UserController(context, configuration);
 
                 // Act
                 var request = new UserDto
@@ -87,19 +112,31 @@ namespace FischQuizAPI.Tests
             var options = new DbContextOptionsBuilder<AppDbContext>()
                 .UseInMemoryDatabase(databaseName: "TestDatabaseTest3")
                 .Options;
+
+            byte[] salt;
+            byte[] hash;
+
+            using (var hmc = new HMACSHA512())
+            {
+                salt = hmc.Key;
+                hash = hmc.ComputeHash(System.Text.Encoding.UTF8.GetBytes("testpassword"));
+            }
+
             // Arrange
             using (var context = new AppDbContext(options))
             {
                 var user = new User
                 {
                     Username = "testuser",
-                    Password = "testpassword"
+                    UserMail = "test@test.de",
+                    UserPasswordSalt = salt,
+                    UserPasswordHash = hash
                 };
 
                 context.Users.Add(user);
                 await context.SaveChangesAsync();
 
-                var controller = new UserController(context);
+                var controller = new UserController(context, configuration);
 
                 // Act
                 var request = new UserDto
@@ -126,7 +163,7 @@ namespace FischQuizAPI.Tests
 
             // Arrange
             var context2 = new AppDbContext(options);
-            var controller = new UserController(context2);
+            var controller = new UserController(context2, configuration);
 
             // Act
             var request = new UserDto
@@ -151,19 +188,30 @@ namespace FischQuizAPI.Tests
                 .UseInMemoryDatabase(databaseName: "TestDatabaseTest5")
                 .Options;
 
+            byte[] salt;
+            byte[] hash;
+
+            using (var hmc = new HMACSHA512())
+            {
+                salt = hmc.Key;
+                hash = hmc.ComputeHash(System.Text.Encoding.UTF8.GetBytes("testpassword"));
+            }
+
             // Arrange
             using (var context = new AppDbContext(options))
             {
                 var user = new User
                 {
                     Username = "testuser",
-                    Password = "testpassword"
+                    UserMail = "test@test.de",
+                    UserPasswordSalt = salt,
+                    UserPasswordHash = hash
                 };
 
                 context.Users.Add(user);
                 await context.SaveChangesAsync();
 
-                var controller = new UserController(context);
+                var controller = new UserController(context, configuration);
 
                 // Act
                 var request = new UserDto

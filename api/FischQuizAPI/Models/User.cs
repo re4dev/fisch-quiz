@@ -8,6 +8,9 @@ namespace FischQuizAPI.Models
         [Key]
         public int UserId { get; set; }
         public string Username { get; set; }
-        public string Password { get; set; }
+        public string UserMail { get; set; }
+
+        public byte[] UserPasswordHash { get; set; }
+        public byte[] UserPasswordSalt { get; set; }
     }
 }

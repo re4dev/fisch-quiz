@@ -13,6 +13,17 @@ builder.Services.AddDbContext<AppDbContext>(
     o => o.UseMySQL(builder.Configuration.GetConnectionString("localServer"))
     );
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("cors", policy =>
+    {
+        policy
+            .WithOrigins("*")
+            .AllowAnyMethod()
+            .AllowAnyHeader();
+    });
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -22,8 +33,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
-
+//app.UseHttpsRedirection();
+app.UseCors("cors");
 app.UseAuthorization();
 
 app.MapControllers();

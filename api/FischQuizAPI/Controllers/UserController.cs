@@ -3,6 +3,10 @@ using FischQuizAPI.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Security.Cryptography;
 
 namespace FischQuizAPI.Controllers
 {
@@ -11,7 +15,12 @@ namespace FischQuizAPI.Controllers
     public class UserController : ControllerBase
     {
         private readonly AppDbContext _context;
-        public UserController(AppDbContext context) => _context = context;
+        private readonly IConfiguration _configuration;
+        public UserController(AppDbContext context, IConfiguration configuration)
+        {
+            _context = context;
+            _configuration = configuration;
+        }
 
         [HttpGet]
         public async Task<IEnumerable<User>> Get()
@@ -32,13 +41,45 @@ namespace FischQuizAPI.Controllers
                     }
 
                     var requestedUser = await _context.Users.FirstOrDefaultAsync(x => x.Username == request.Username);
+                    bool rightPassword = false;
 
-                    if (requestedUser.Password != request.Password)
+                    using (var hmc = new HMACSHA512(requestedUser.UserPasswordSalt))
+                    {
+                        var computedHash = hmc.ComputeHash(System.Text.Encoding.UTF8.GetBytes(request.Password));
+
+                        rightPassword = computedHash.SequenceEqual(requestedUser.UserPasswordHash);
+
+                    }
+
+                    if (rightPassword == false)
                     {
                         return BadRequest("Wrong password!");
                     }
 
-                    return Ok(requestedUser.UserId);
+                    List<Claim> claims = new List<Claim>
+                    {
+                        new Claim(ClaimTypes.Name, requestedUser.Username),
+                        new Claim(ClaimTypes.NameIdentifier, requestedUser.UserId.ToString())
+                    };
+
+
+                    var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(_configuration.GetSection("AppSettings:Token").Value));
+
+                    var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
+
+                    var token = new JwtSecurityToken(claims: claims, expires: DateTime.Now.AddMinutes(60), signingCredentials: creds);
+
+                    var jwt = new JwtSecurityTokenHandler().WriteToken(token);
+
+                    LoginUser loginUser = new()
+                    {
+                        name = requestedUser.Username,
+                        id = requestedUser.UserId,
+                        accessToken = jwt,
+                        email = "test@test.de"
+                    };
+
+                    return Ok(loginUser);
 
                 }
             }
@@ -62,8 +103,14 @@ namespace FischQuizAPI.Controllers
 
                     User newUser = new();
 
+                    using (var hmc = new HMACSHA512())
+                    {
+                        newUser.UserPasswordSalt = hmc.Key;
+                        newUser.UserPasswordHash = hmc.ComputeHash(System.Text.Encoding.UTF8.GetBytes(request.Password));
+                    }
+
                     newUser.Username = request.Username;
-                    newUser.Password = request.Password;
+                    newUser.UserMail = "";
 
                     await _context.Users.AddAsync(newUser);
 

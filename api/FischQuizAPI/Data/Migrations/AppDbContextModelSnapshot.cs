@@ -39,9 +39,17 @@ namespace FischQuizAPI.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("Password")
+                    b.Property<string>("UserMail")
                         .IsRequired()
                         .HasColumnType("longtext");
+
+                    b.Property<byte[]>("UserPasswordHash")
+                        .IsRequired()
+                        .HasColumnType("longblob");
+
+                    b.Property<byte[]>("UserPasswordSalt")
+                        .IsRequired()
+                        .HasColumnType("longblob");
 
                     b.Property<string>("Username")
                         .IsRequired()
