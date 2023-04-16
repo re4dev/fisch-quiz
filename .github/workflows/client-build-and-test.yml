@@ -5,7 +5,7 @@ on:
     branches: [ "main" ]
 
 env:
-  SolutionName: fishQuizFrontend
+  ContainerName: fishquizfrontend
 
 jobs:
   build:
@@ -14,9 +14,9 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
-      - name: Build Container for ${{ env.SolutionName }}
+      - name: Build Container for ${{ env.ContainerName }}
         uses: docker/build-push-action@v2
         with:
           file: client/fish-quiz/Dockerfile
           push: true
-          tags: qeex/${{ env.SolutionName }}:latest
+          tags: qeex/${{ env.ContainerName }}:latest
