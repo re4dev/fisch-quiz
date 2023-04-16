@@ -24,7 +24,7 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: client
-          file: fisch-quiz/Dockerfile
+          file: client/fisch-quiz/Dockerfile
           push: true
           tags: qeex/${{ env.ContainerName }}:latest
 
