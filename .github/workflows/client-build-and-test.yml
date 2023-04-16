@@ -1,0 +1,22 @@
+name: CI/CD
+
+on:
+  push:
+    branches: [ "main" ]
+
+env:
+  SolutionName: fishQuizFrontend
+
+jobs:
+  build:
+    name: Build Container
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - name: Build Container for ${{ env.SolutionName }}
+        uses: docker/build-push-action@v2
+        with:
+          file: client/fish-quiz/Dockerfile
+          push: true
+          tags: qeex/${{ env.SolutionName }}:latest
