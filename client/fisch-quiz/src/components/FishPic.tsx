@@ -1,7 +1,7 @@
 import React from 'react'
 import { Image } from '@nextui-org/react';
 
-export const FishPic = (props) => {
+export default function FishPic() {
   return (
     <div>
       <Image

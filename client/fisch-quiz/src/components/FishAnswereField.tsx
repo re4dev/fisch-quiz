@@ -1,8 +1,7 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { Button, Spacer, Container } from '@nextui-org/react';
 
-function FishAnswereField(props) {
+function FishAnswereField() {
   return (
     <Container display='grid' alignItems="center" justify="center" > 
         <Button icon={"A"}>Fish A</Button>
@@ -15,7 +14,5 @@ function FishAnswereField(props) {
     </Container>
   )
 }
-
-FishAnswereField.propTypes = {}
 
 export default FishAnswereField

@@ -1,4 +1,13 @@
-export const HeartIcon = ({
+interface HeartIconProps {
+  fill?: string;
+  filled?: boolean;
+  size?: number;
+  height?: string;
+  width?: string;
+  label?: string;
+}
+
+export const HeartIcon: React.FC<HeartIconProps> = ({
     fill = 'currentColor',
     filled,
     size,

@@ -1,5 +1,5 @@
 import FishAnswereField from '@/components/FishAnswereField'
-import { FishPic } from '@/components/FishPic'
+import FishPic from '@/components/FishPic'
 import Navigation from '@/components/Navigation'
 import { HeartIcon } from '@/icons/HeartIcon'
 import { Text, Container, Spacer, Button } from '@nextui-org/react'
