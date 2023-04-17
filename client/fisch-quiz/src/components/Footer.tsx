@@ -17,6 +17,10 @@ function Footer() {
             <Grid>
                 <Link href="#">Datenschutz</Link>
             </Grid>
+            <Spacer x={1} />
+            <Grid>
+                <Link href="#">Kontakt</Link>
+            </Grid>
         </Grid.Container>
         <Grid.Container gap={1} justify="center">
             <Grid>
