@@ -7,7 +7,6 @@ RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
 # Install dependencies based on the preferred package manager
-RUN ls /app
 COPY ./client/fisch-quiz/package.json yarn.lock* ./client/fisch-quiz/package-lock.json* pnpm-lock.yaml* ./
 RUN \
   if [ -f yarn.lock ]; then yarn --frozen-lockfile; \
@@ -21,6 +20,7 @@ RUN \
 FROM base AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
+COPY --from=deps /app/package.json ./
 COPY . .
 
 # Next.js collects completely anonymous telemetry data about general usage.
