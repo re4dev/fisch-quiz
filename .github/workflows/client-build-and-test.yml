@@ -2,7 +2,9 @@ name: CI/CD
 
 on:
   push:
-    branches: [ "main" ]
+    branches:
+      - main
+      - fix-pipeline
 
 env:
   ContainerName: fishquizfrontend
@@ -23,8 +25,8 @@ jobs:
       - name: Build Container
         uses: docker/build-push-action@v4
         with:
-          context: client
-          file: client/fisch-quiz/Dockerfile
+          context: .
+          file: ./client/fisch-quiz/Dockerfile
           push: true
           tags: qeex/${{ env.ContainerName }}:latest
 
