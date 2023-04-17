@@ -8,7 +8,7 @@ WORKDIR /app
 
 # Install dependencies based on the preferred package manager
 RUN ls /app
-COPY ./client/fisch-quiz/package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
+COPY ./client/fisch-quiz/package.json yarn.lock* ./client/fisch-quiz/package-lock.json* pnpm-lock.yaml* ./
 RUN \
   if [ -f yarn.lock ]; then yarn --frozen-lockfile; \
   elif [ -f package-lock.json ]; then npm ci; \
