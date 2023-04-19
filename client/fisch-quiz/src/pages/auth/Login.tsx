@@ -51,10 +51,15 @@ export default function Login() {
           />
           <Spacer y={4} />
           <Button>Einloggen</Button>
+          <Container>
+            <Link href="/">
+              Als Gast fortfahren
+            </Link> 
+          </Container>
           <Spacer y={5} />
         <Text h2 css={{ as: "center"}}>Neu hier?</Text>
         <Container display="flex" alignItems="center" justify="center">
-            <Link href="/auth/Registrieren" className="font-medium text-indigo-600 hover:text-indigo-500">
+            <Link href="/auth/registrieren" className="font-medium text-indigo-600 hover:text-indigo-500">
                 Registrieren
             </Link> 
         </Container>

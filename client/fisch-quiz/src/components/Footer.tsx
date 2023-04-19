@@ -7,7 +7,7 @@ function Footer() {
     <Container justify="center" css={{bottom: "0", position: "fixed", height: "auto"}} fluid>
         <Grid.Container gap={1} justify="center">
             <Grid>
-                <Link href="#">Github</Link>
+                <Link href="https://github.com/re4dev/fisch-quiz" target="_blank">Github</Link>
             </Grid>
             <Spacer x={1} />
             <Grid>
@@ -19,7 +19,7 @@ function Footer() {
             </Grid>
             <Spacer x={1} />
             <Grid>
-                <Link href="#">Kontakt</Link>
+                <Link href="/contact">Kontakt</Link>
             </Grid>
         </Grid.Container>
         <Grid.Container gap={1} justify="center">

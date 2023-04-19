@@ -69,10 +69,15 @@ export default function Registrieren() {
           />
           <Spacer y={4} />
           <Button>Registrieren</Button>
+          <Container>
+            <Link href="/">
+              Als Gast fortfahren
+            </Link> 
+          </Container>
           <Spacer y={5} />
         <Text h2 css={{ as: "center"}}>Bereits ein Konto?</Text>
         <Container display="flex" alignItems="center" justify="center">
-            <Link href="/auth/Login" className="font-medium text-indigo-600 hover:text-indigo-500">
+            <Link href="/auth/login">
                 Anmelden
             </Link> 
         </Container>

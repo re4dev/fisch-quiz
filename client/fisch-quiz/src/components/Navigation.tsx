@@ -12,12 +12,12 @@ function Navigation() {
             <Navbar.Link href="#">Falsche</Navbar.Link>
         </Navbar.Content>
         <Navbar.Content>
-            <Navbar.Link color="inherit" href="#">
+            <Navbar.Link color="inherit" href="/auth/login">
                 Login
             </Navbar.Link>
             <Navbar.Item>
-                <Button auto flat as={Link} href="#">
-                Sign Up
+                <Button auto flat as={Link} href="/auth/registrieren">
+                    Sign Up
                 </Button>
             </Navbar.Item>
         </Navbar.Content>
