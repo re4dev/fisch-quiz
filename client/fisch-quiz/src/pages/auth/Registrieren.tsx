@@ -1,20 +1,38 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import {
   Card,
   Spacer,
   Button,
   Text,
   Input,
-  Row,
-  Checkbox,
   Container,
 } from '@nextui-org/react';
 import Link from 'next/link';
+import useRegister from '../../../hooks/useRegister';
+import { useRouter } from 'next/router';
 
 
 export default function Registrieren() {
+  const { register, registerResponse, registerError, registerIsLoading } = useRegister();
+  const username = useRef<HTMLInputElement>();
+  const email = useRef<HTMLInputElement>();
+  const password = useRef<HTMLInputElement>();
+  const passwordRepeat = useRef<HTMLInputElement>();
+  const router = useRouter();
+
+  function handleRegister(){
+    const registerUser: IRegisterUser = {
+      username: username.current.value,
+      email: email.current.value,
+      password: password.current.value,
+      passwordRepeat: passwordRepeat.current.value
+    }
+
+    register(registerUser);
+  }
+
   return (
-<div>
+    <div>
       <Container
         display="flex"
         alignItems="center"
@@ -33,54 +51,57 @@ export default function Registrieren() {
             Registrieren
           </Text>
           <Input
-            clearable
             bordered
             fullWidth
             color="primary"
             size="lg"
             placeholder="Benutzername"
+            ref={username}
           />
           <Spacer y={0.4} />
           <Input
-            clearable
             bordered
             fullWidth
             color="primary"
             size="lg"
             placeholder="E-Mail"
+            ref={email}
           />
           <Spacer y={0.8} />
-          <Input
-            clearable
+          <Input.Password
+            type='password'
             bordered
             fullWidth
             color="primary"
             size="lg"
             placeholder="Passwort"
+            ref={password}
           />
           <Spacer y={0.3} />
-          <Input
-            clearable
+          <Input.Password
+            type='password'
             bordered
             fullWidth
             color="primary"
             size="lg"
             placeholder="Passwort wiederholen"
+            ref={passwordRepeat}
           />
-          <Spacer y={4} />
-          <Button>Registrieren</Button>
+          {registerError ? <Text>{registerError}</Text> : <Text>{registerResponse}</Text>}
+          <Spacer y={3} />
+          <Button onClick={handleRegister}>Registrieren</Button>
           <Container>
             <Link href="/">
               Als Gast fortfahren
-            </Link> 
+            </Link>
           </Container>
           <Spacer y={5} />
-        <Text h2 css={{ as: "center"}}>Bereits ein Konto?</Text>
-        <Container display="flex" alignItems="center" justify="center">
+          <Text h2 css={{ as: "center" }}>Bereits ein Konto?</Text>
+          <Container display="flex" alignItems="center" justify="center">
             <Link href="/auth/login">
-                Anmelden
-            </Link> 
-        </Container>
+              Anmelden
+            </Link>
+          </Container>
         </Card>
       </Container>
     </div>
