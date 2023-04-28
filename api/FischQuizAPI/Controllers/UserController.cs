@@ -29,7 +29,8 @@ namespace FischQuizAPI.Controllers
         }
 
         [HttpPost("Login")]
-        public async Task<ActionResult> Login(UserDto request)
+        [Produces("application/json")]
+        public async Task<IActionResult> Login(UserDto request)
         {
             try
             {
@@ -39,6 +40,12 @@ namespace FischQuizAPI.Controllers
                     {
                         return BadRequest("User not found!");
                     }
+
+                    if(request.Password == null || request.Password == "")
+                    {
+                        return BadRequest("Password can't be empty");
+                    }
+
 
                     var requestedUser = await _context.Users.FirstOrDefaultAsync(x => x.Username == request.Username);
                     bool rightPassword = false;
@@ -76,7 +83,7 @@ namespace FischQuizAPI.Controllers
                         name = requestedUser.Username,
                         id = requestedUser.UserId,
                         accessToken = jwt,
-                        email = "test@test.de"
+                        email = requestedUser.UserMail
                     };
 
                     return Ok(loginUser);
