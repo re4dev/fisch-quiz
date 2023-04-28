@@ -1,4 +1,4 @@
-﻿using FischQuizAPI.Data;
+using FischQuizAPI.Data;
 using FischQuizAPI.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -110,7 +110,7 @@ namespace FischQuizAPI.Controllers
                     }
 
                     newUser.Username = request.Username;
-                    newUser.UserMail = "";
+                    newUser.UserMail = request.Mail;
 
                     await _context.Users.AddAsync(newUser);
 
