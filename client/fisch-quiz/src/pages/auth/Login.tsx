@@ -1,20 +1,32 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import {
   Card,
   Spacer,
   Button,
   Text,
   Input,
-  Row,
-  Checkbox,
   Container,
 } from '@nextui-org/react';
 import Link from 'next/link';
+import useLogin from '../../../hooks/useLogin';
 
 
 export default function Login() {
+  const { login, loginResponse, loginError, loginIsLoading } = useLogin();
+  const username = useRef<HTMLInputElement>();
+  const password = useRef<HTMLInputElement>();
+
+  function handleLogin(){
+    const loginUser: ILoginUser = {
+      username: username.current.value,
+      password: password.current.value,
+    }
+
+    login(loginUser);
+  }
+
   return (
-<div>
+    <div>
       <Container
         display="flex"
         alignItems="center"
@@ -33,36 +45,37 @@ export default function Login() {
             Anmelden
           </Text>
           <Input
-            clearable
             bordered
             fullWidth
             color="primary"
             size="lg"
             placeholder="Benutzername"
+            ref={username}
           />
           <Spacer y={1} />
-          <Input
-            clearable
+          <Input.Password
             bordered
             fullWidth
             color="primary"
             size="lg"
             placeholder="Passwort"
+            ref={password}
           />
+          {loginError ? <Text>{loginError}</Text> : <Text>{loginResponse}</Text>}
           <Spacer y={4} />
-          <Button>Einloggen</Button>
+          <Button onClick={handleLogin}>Einloggen</Button>
           <Container>
             <Link href="/">
               Als Gast fortfahren
-            </Link> 
+            </Link>
           </Container>
           <Spacer y={5} />
-        <Text h2 css={{ as: "center"}}>Neu hier?</Text>
-        <Container display="flex" alignItems="center" justify="center">
+          <Text h2 css={{ as: "center" }}>Neu hier?</Text>
+          <Container display="flex" alignItems="center" justify="center">
             <Link href="/auth/registrieren" className="font-medium text-indigo-600 hover:text-indigo-500">
-                Registrieren
-            </Link> 
-        </Container>
+              Registrieren
+            </Link>
+          </Container>
         </Card>
       </Container>
     </div>
