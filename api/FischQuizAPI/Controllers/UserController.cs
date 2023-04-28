@@ -1,4 +1,4 @@
-using FischQuizAPI.Data;
+﻿using FischQuizAPI.Data;
 using FischQuizAPI.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -90,7 +90,8 @@ namespace FischQuizAPI.Controllers
         }
 
         [HttpPost("Register")]
-        public async Task<ActionResult> Register(UserDto request)
+        [Produces("application/json")]
+        public async Task<IActionResult> Register(UserDto request)
         {
             try
             {
@@ -99,6 +100,16 @@ namespace FischQuizAPI.Controllers
                     if (await _context.Users.AnyAsync(x => x.Username == request.Username))
                     {
                         return BadRequest("Username already in use!");
+                    }
+
+                    if (request.Password == null || request.Password == "")
+                    {
+                        return BadRequest("Bad password!");
+                    }
+
+                    if (request.Password != request.PasswordRepeat)
+                    {
+                        return BadRequest("Password is not the same!");
                     }
 
                     User newUser = new();
