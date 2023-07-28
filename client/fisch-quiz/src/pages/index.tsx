@@ -4,10 +4,12 @@ import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
 import Footer from '@/components/Footer'
 import Quiz from '@/components/Quiz'
+import useGetFishes from '../../hooks/useGetFishes'
+import { GetStaticProps } from 'next'
 
 const inter = Inter({ subsets: ['latin'] })
 
-export default function Home() {
+export default function Home({ FishData }) {
   return (
     <>
       <Head>
@@ -17,8 +19,25 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <Quiz></Quiz>
+        <Quiz data={FishData}></Quiz>
       </main>
     </>
   )
+}
+
+
+export const getStaticProps: GetStaticProps = async (context) => {
+  const response = await fetch(process.env.NEXT_PUBLIC_API_URL + "/Fish", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+  var result = await response.json()
+  var FishData = result;
+  return {
+    props: {
+      FishData,
+    },
+  };
 }
