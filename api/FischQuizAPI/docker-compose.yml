@@ -1,17 +1,16 @@
-version: '3.4'
+version: "3.4"
 
 services:
-
   db:
     image: mysql
     command: --default-authentication-plugin=mysql_native_password
     restart: always
     environment:
-      MYSQL_DATABASE: 'FischQuiz'
-      MYSQL_USER: 'fischuser'
+      MYSQL_DATABASE: "FischQuiz"
+      MYSQL_USER: "fischuser"
       MYSQL_PASSWORD: example
     ports:
-      - '9999:3306'
+      - "9999:3306"
     volumes:
       - fish-db:/var/lib/mysql
 
