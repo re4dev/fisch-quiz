@@ -10,7 +10,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<AppDbContext>(
-    o => o.UseMySQL(builder.Configuration.GetConnectionString("localServer"))
+    o => o.UseSqlServer(builder.Configuration.GetConnectionString("sqlServer"))
     );
 
 builder.Services.AddCors(options =>
@@ -38,5 +38,12 @@ app.UseCors("cors");
 app.UseAuthorization();
 
 app.MapControllers();
+
+using (var scope = app.Services.CreateScope())
+{
+    var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    dbContext.Database.Migrate();
+}
+
 
 app.Run();
