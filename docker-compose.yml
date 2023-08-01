@@ -1,0 +1,11 @@
+version: "3.4"
+
+services:
+  fischquizapi:
+    image: ${REGISTRY:-docker.io}/qeex/fischquizapi:${TAG:-latest}
+    ports:
+      - "8066:80"
+  fischquizui:
+    image: ${REGISTRY:-docker.io}/qeex/fischquizui:${TAG:-latest}
+    ports:
+      - "8067:80"
