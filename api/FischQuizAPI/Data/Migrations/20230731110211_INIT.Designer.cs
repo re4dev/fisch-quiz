@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FischQuizAPI.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230731090540_INIT")]
+    [Migration("20230731110211_INIT")]
     partial class INIT
     {
         /// <inheritdoc />
