@@ -12,6 +12,7 @@ function Quiz(data) {
   const [allOtherFishes, setAllOtherFishes] = useState<IFish[]>([]);
   var otherFishes: IFish[] = FishData;
   var answereFishes: IFish[] = [];
+  const [answereResult, setAnwereResult] = useState<string>("");
 
   useEffect(() => {
     createRandomId();
@@ -19,6 +20,8 @@ function Quiz(data) {
 
 
   function getRandomFishlist(fishListe: IFish[]) {
+    setAnwereResult("");
+    
     // Array zum Speichern der zufälligen Fische
     let randomFishes: IFish[] = [];
 
@@ -78,9 +81,11 @@ function Quiz(data) {
     console.log(e);
     if(e.fishId === randomFishId){
       console.log("Richtige antwort")
+      setAnwereResult("Richtig!");
       createRandomId();
     }
     else {
+      setAnwereResult("Falsch! Nächster Versuch.")
       console.log("Falsch.")
     }
   }
@@ -105,7 +110,7 @@ function Quiz(data) {
             <Image
               width={320}
               height={180}
-              src={"https://picsum.photos/id/" + randomFishId + "/200/300"}
+              src={"http://161.97.176.7/fishquiz/" + randomFishId + ".png"}
               alt="Default Image"
               objectFit="fill"
               css={{ "border-radius": "30%", margin: "0" }}
@@ -116,6 +121,11 @@ function Quiz(data) {
               <Button auto rounded="true" css={{position: "absolute"}}><HeartIcon fill="red" filled height="40" width="40"/></Button>
               </div> */}
         </Container>
+
+        <Container display='grid' alignItems="center" justify="center" style={{height: "20px" }}>
+          {answereResult ? <div><p style={{color: "red"}}>{answereResult}</p></div> : <div></div>}
+        </Container>
+        
 
         <Spacer y={3} />
 
