@@ -1,9 +1,9 @@
 import React from 'react'
-import { Button, Spacer, Container } from '@nextui-org/react';
+import { Button, Spacer } from '@nextui-org/react';
 
 function FishAnswereField() {
   return (
-    <Container display='grid' alignItems="center" justify="center" > 
+    <div className='items-center justify-center'> 
         <Button icon={"A"}>Fish A</Button>
         <Spacer y={1} />
         <Button icon={"B"}>Fish B</Button>
@@ -11,7 +11,7 @@ function FishAnswereField() {
         <Button icon={"C"}>Fish C</Button>
         <Spacer y={1} />
         <Button icon={"D"}>Fish D</Button>
-    </Container>
+    </div>
   )
 }
 
