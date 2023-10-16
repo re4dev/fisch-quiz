@@ -119,13 +119,13 @@ function Quiz(data) {
         <Spacer y={3} />
 
         <div className='mx-auto w-fit'>
-          <Button className='bg-blue-500 w-64' icon={"A"} onPress={() => checkAnswere(allOtherFishes[0])}>{allOtherFishes[0] ? allOtherFishes[0].fishName : ""}</Button>
+          <Button className='bg-blue-500 w-64' onPress={() => checkAnswere(allOtherFishes[0])}>{allOtherFishes[0] ? allOtherFishes[0].fishName : ""}</Button>
           <Spacer y={1} />
-          <Button className='bg-blue-500 w-64' icon={"B"} onPress={() => checkAnswere(allOtherFishes[1])}>{allOtherFishes[0] ? allOtherFishes[1].fishName : ""}</Button>
+          <Button className='bg-blue-500 w-64' onPress={() => checkAnswere(allOtherFishes[1])}>{allOtherFishes[0] ? allOtherFishes[1].fishName : ""}</Button>
           <Spacer y={1} />
-          <Button className='bg-blue-500 w-64' icon={"C"} onPress={() => checkAnswere(allOtherFishes[2])}>{allOtherFishes[0] ? allOtherFishes[2].fishName : ""}</Button>
+          <Button className='bg-blue-500 w-64' onPress={() => checkAnswere(allOtherFishes[2])}>{allOtherFishes[0] ? allOtherFishes[2].fishName : ""}</Button>
           <Spacer y={1} />
-          <Button className='bg-blue-500 w-64' icon={"D"} onPress={() => checkAnswere(allOtherFishes[3])}>{allOtherFishes[0] ? allOtherFishes[3].fishName : ""}</Button>
+          <Button className='bg-blue-500 w-64' onPress={() => checkAnswere(allOtherFishes[3])}>{allOtherFishes[0] ? allOtherFishes[3].fishName : ""}</Button>
           <Spacer y={1}></Spacer>
           {/* <Button onPress={createRandomId}>Start</Button> */}
         </div>
