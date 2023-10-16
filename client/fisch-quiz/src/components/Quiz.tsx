@@ -62,11 +62,7 @@ function Quiz(data) {
 
 
     setRandomFishId(fishId);
-    console.log("vorher")
-    console.log(answereFishes);
     shuffleArray(answereFishes);
-    console.log("nachher")
-    console.log(answereFishes);
     setAllOtherFishes(answereFishes);
   }
 
@@ -78,15 +74,12 @@ function Quiz(data) {
   }
 
   function checkAnswere(e: IFish): void {
-    console.log(e);
     if(e.fishId === randomFishId){
-      console.log("Richtige antwort")
       setAnwereResult("Richtig!");
       createRandomId();
     }
     else {
       setAnwereResult("Falsch! Nächster Versuch.")
-      console.log("Falsch.")
     }
   }
 
