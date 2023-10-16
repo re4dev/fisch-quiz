@@ -5,7 +5,7 @@ import React from "react";
 function Footer() {
   return (
     <Container justify="center" css={{bottom: "0", position: "fixed", height: "auto"}} fluid>
-        <Grid.Container gap={1} justify="center">
+        {/* <Grid.Container gap={1} justify="center">
             <Grid>
                 <Link href="https://github.com/re4dev/fisch-quiz" target="_blank">Github</Link>
             </Grid>
@@ -21,7 +21,7 @@ function Footer() {
             <Grid>
                 <Link href="/contact">Kontakt</Link>
             </Grid>
-        </Grid.Container>
+        </Grid.Container> */}
         <Grid.Container gap={1} justify="center">
             <Grid>
                 <Text>© 2023 Fisch-Quiz. All Rights Reserved.</Text>

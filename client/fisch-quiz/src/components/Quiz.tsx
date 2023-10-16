@@ -91,56 +91,53 @@ function Quiz(data) {
   }
 
   return (
-    <Container>
-      <Navigation></Navigation>
+    <Container className=''>
+      {/* <Navigation></Navigation> */}
 
       <Spacer y={1} />
 
-      <Container justify='center' css={{ width: "fit-content" }}>
-        <Text h1>Welchen Fisch siehst du?</Text>
-        <p>aktuelle fish id ist {randomFishId}</p>
+      <Container className='w-fit'>
+        <Text className='text-3xl font-semibold'>Welchen Fisch siehst du?</Text>
       </Container>
 
       <Spacer y={3} />
 
       {/* <QuizPlace FishData={FishData}></QuizPlace> */}
-      <Container>
-        <Container display="flex" wrap='wrap' justify='center' css={{ position: "relative" }}>
+      <div className=''>
+        <div className='flex justify-center'>
           <div>
             <Image
-              width={320}
-              height={180}
               src={"http://161.97.176.7/fishquiz/" + randomFishId + ".png"}
               alt="Default Image"
               objectFit="fill"
-              css={{ "border-radius": "30%", margin: "0" }}
+              className='w-80 rounded-lg m-0'
 
             />
           </div>
           {/* <div>
               <Button auto rounded="true" css={{position: "absolute"}}><HeartIcon fill="red" filled height="40" width="40"/></Button>
               </div> */}
-        </Container>
+        </div>
 
-        <Container display='grid' alignItems="center" justify="center" style={{height: "20px" }}>
-          {answereResult ? <div><p style={{color: "red"}}>{answereResult}</p></div> : <div></div>}
-        </Container>
+        <div className='w-fit justify-center h-5 mx-auto'>
+          {answereResult ? <div><p className='text-red-600'>{answereResult}</p></div> : <div></div>}
+        </div>
         
 
         <Spacer y={3} />
 
-        <Container display='grid' alignItems="center" justify="center" >
-          <Button icon={"A"} onPress={() => checkAnswere(allOtherFishes[0])}>{allOtherFishes[0] ? allOtherFishes[0].fishName : ""}</Button>
+        <div className='mx-auto w-fit'>
+          <Button className='bg-blue-500 w-64' icon={"A"} onPress={() => checkAnswere(allOtherFishes[0])}>{allOtherFishes[0] ? allOtherFishes[0].fishName : ""}</Button>
           <Spacer y={1} />
-          <Button icon={"B"} onPress={() => checkAnswere(allOtherFishes[1])}>{allOtherFishes[0] ? allOtherFishes[1].fishName : ""}</Button>
+          <Button className='bg-blue-500 w-64' icon={"B"} onPress={() => checkAnswere(allOtherFishes[1])}>{allOtherFishes[0] ? allOtherFishes[1].fishName : ""}</Button>
           <Spacer y={1} />
-          <Button icon={"C"} onPress={() => checkAnswere(allOtherFishes[2])}>{allOtherFishes[0] ? allOtherFishes[2].fishName : ""}</Button>
+          <Button className='bg-blue-500 w-64' icon={"C"} onPress={() => checkAnswere(allOtherFishes[2])}>{allOtherFishes[0] ? allOtherFishes[2].fishName : ""}</Button>
           <Spacer y={1} />
-          <Button icon={"D"} onPress={() => checkAnswere(allOtherFishes[3])}>{allOtherFishes[0] ? allOtherFishes[3].fishName : ""}</Button>
+          <Button className='bg-blue-500 w-64' icon={"D"} onPress={() => checkAnswere(allOtherFishes[3])}>{allOtherFishes[0] ? allOtherFishes[3].fishName : ""}</Button>
           <Spacer y={1}></Spacer>
           {/* <Button onPress={createRandomId}>Start</Button> */}
-        </Container>
-      </Container>
+        </div>
+      </div>
     </Container>
   )
 }
