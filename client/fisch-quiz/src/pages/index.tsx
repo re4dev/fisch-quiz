@@ -2,12 +2,13 @@ import Head from 'next/head'
 import { Inter } from 'next/font/google'
 import Quiz from '@/components/Quiz'
 import { GetStaticProps } from 'next'
+import Footer from '@/components/Footer'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home({ FishData }) {
   return (
-    <>
+    <div className='flex flex-col min-h-screen'>
       <Head>
         <title>Fisch-Quiz</title>
         <meta name="description" content="Kennst du alle Fische? Fisch-Quiz lässt es dich wissen." />
@@ -17,7 +18,8 @@ export default function Home({ FishData }) {
       <main>
         <Quiz data={FishData}></Quiz>
       </main>
-    </>
+      <Footer></Footer>
+    </div>
   )
 }
 

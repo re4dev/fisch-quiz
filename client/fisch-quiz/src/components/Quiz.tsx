@@ -1,5 +1,5 @@
 import Navigation from '@/components/Navigation'
-import { Text, Container, Spacer, Button, Image } from '@nextui-org/react'
+import { Spacer, Button, Image } from '@nextui-org/react'
 import React, { useEffect, useState, useRef } from 'react'
 
 
@@ -84,14 +84,14 @@ function Quiz(data) {
   }
 
   return (
-    <Container className=''>
+    <div className=''>
       {/* <Navigation></Navigation> */}
 
       <Spacer y={1} />
 
-      <Container className='w-fit'>
-        <Text className='text-3xl font-semibold'>Welchen Fisch siehst du?</Text>
-      </Container>
+      <div className='w-fit mx-auto'>
+        <p className='text-3xl font-semibold'>Welchen Fisch siehst du?</p>
+      </div>
 
       <Spacer y={3} />
 
@@ -102,7 +102,6 @@ function Quiz(data) {
             <Image
               src={"http://161.97.176.7/fishquiz/" + randomFishId + ".png"}
               alt="Default Image"
-              objectFit="fill"
               className='w-80 rounded-lg m-0'
 
             />
@@ -131,7 +130,7 @@ function Quiz(data) {
           {/* <Button onPress={createRandomId}>Start</Button> */}
         </div>
       </div>
-    </Container>
+    </div>
   )
 }
 

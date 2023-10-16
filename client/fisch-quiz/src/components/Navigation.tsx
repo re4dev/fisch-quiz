@@ -1,26 +1,26 @@
 import React from 'react'
-import { Navbar, Button, Link, Spacer } from "@nextui-org/react";
+import { Navbar, Button, Link, Spacer, NavbarContent, NavbarItem } from "@nextui-org/react";
 
 function Navigation() {
   return (
     <Navbar isBordered>
-        <Navbar.Content hideIn="xs">
-            <Navbar.Link href="#">Alle</Navbar.Link>
+        <NavbarContent>
+            <Link href="#">Alle</Link>
             <Spacer x={0.5} />
-            <Navbar.Link href="#">Favoriten</Navbar.Link>
+            <Link href="#">Favoriten</Link>
             <Spacer x={0.5} />
-            <Navbar.Link href="#">Falsche</Navbar.Link>
-        </Navbar.Content>
-        <Navbar.Content>
-            <Navbar.Link color="inherit" href="/auth/login">
+            <Link href="#">Falsche</Link>
+        </NavbarContent>
+        <NavbarContent>
+            <Link color="inherit" href="/auth/login">
                 Login
-            </Navbar.Link>
-            <Navbar.Item>
+            </Link>
+            <NavbarItem>
                 <Button auto flat as={Link} href="/auth/registrieren">
                     Sign Up
                 </Button>
-            </Navbar.Item>
-        </Navbar.Content>
+            </NavbarItem>
+        </NavbarContent>
     </Navbar>
   )
 }

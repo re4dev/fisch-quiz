@@ -1,10 +1,10 @@
-import { Grid, Container, Spacer, Text } from "@nextui-org/react";
+
 import Link from "next/link";
 import React from "react";
 
 function Footer() {
   return (
-    <Container justify="center" css={{bottom: "0", position: "fixed", height: "auto"}} fluid>
+    <footer className="mt-auto justify-center w-fit mx-auto">
         {/* <Grid.Container gap={1} justify="center">
             <Grid>
                 <Link href="https://github.com/re4dev/fisch-quiz" target="_blank">Github</Link>
@@ -22,14 +22,11 @@ function Footer() {
                 <Link href="/contact">Kontakt</Link>
             </Grid>
         </Grid.Container> */}
-        <Grid.Container gap={1} justify="center">
-            <Grid>
-                <Text>© 2023 Fisch-Quiz. All Rights Reserved.</Text>
-            </Grid>
-        </Grid.Container>
-    </Container>
-    
-  );
+        <div>
+                <p>© 2023 Fisch-Quiz. All Rights Reserved.</p>
+        </div>
+    </footer>
+ );
 };
 
 export default Footer;
