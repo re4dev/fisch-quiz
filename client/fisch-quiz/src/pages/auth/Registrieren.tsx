@@ -3,9 +3,7 @@ import {
   Card,
   Spacer,
   Button,
-  Text,
   Input,
-  Container,
 } from '@nextui-org/react';
 import Link from 'next/link';
 import useRegister from '../../../hooks/useRegister';
@@ -33,77 +31,63 @@ export default function Registrieren() {
 
   return (
     <div>
-      <Container
-        display="flex"
-        alignItems="center"
-        justify="center"
-        css={{ minHeight: '100vh' }}
-      >
-        <Card css={{ mw: '420px', p: '20px' }}>
-          <Text
-            size={24}
-            weight="bold"
-            css={{
-              as: 'center',
-              mb: '20px',
-            }}
-          >
+      <div className='justify-center flex content-center'>
+        <Card>
+          <p className=' text-base font-bold mb-20px'>
             Registrieren
-          </Text>
+          </p>
           <Input
-            bordered
-            fullWidth
+             variant="bordered"
             color="primary"
             size="lg"
             placeholder="Benutzername"
             ref={username}
           />
-          <Spacer y={0.4} />
+          <Spacer y={0.5} />
           <Input
-            bordered
-            fullWidth
+            variant="bordered"
             color="primary"
             size="lg"
             placeholder="E-Mail"
             ref={email}
           />
-          <Spacer y={0.8} />
-          <Input.Password
+          <Spacer y={0.5} />
+          <Input
             type='password'
-            bordered
+            variant="bordered"
             fullWidth
             color="primary"
             size="lg"
             placeholder="Passwort"
             ref={password}
           />
-          <Spacer y={0.3} />
-          <Input.Password
+          <Spacer y={0.5} />
+          <Input
             type='password'
-            bordered
+            variant="bordered"
             fullWidth
             color="primary"
             size="lg"
             placeholder="Passwort wiederholen"
             ref={passwordRepeat}
           />
-          {registerError ? <Text>{registerError}</Text> : <Text>{registerResponse}</Text>}
+          {registerError ? <p>{registerError}</p> : <p>{registerResponse}</p>}
           <Spacer y={3} />
           <Button onClick={handleRegister}>Registrieren</Button>
-          <Container>
+          <div>
             <Link href="/">
               Als Gast fortfahren
             </Link>
-          </Container>
+          </div>
           <Spacer y={5} />
-          <Text h2 css={{ as: "center" }}>Bereits ein Konto?</Text>
-          <Container display="flex" alignItems="center" justify="center">
+          <p>Bereits ein Konto?</p>
+          <div className='justify-center flex content-center'>
             <Link href="/auth/login">
               Anmelden
             </Link>
-          </Container>
+          </div>
         </Card>
-      </Container>
+      </div>
     </div>
 
   )

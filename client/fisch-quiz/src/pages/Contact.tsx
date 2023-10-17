@@ -1,13 +1,13 @@
 import Navigation from '@/components/Navigation'
-import { Container, Input, Card, Text, Spacer, Textarea, Button } from '@nextui-org/react'
+import { Input, Card, Spacer, Textarea, Button } from '@nextui-org/react'
 import React from 'react'
 
 export default function Contact() {
   return (
-    <Container display='flex' alignItems='center' justify='center'>
+    <div className='justify-center flex content-center'>
         <Navigation></Navigation>
-        <Card css={{width: 750, height: "fit-content", padding: "$10", marginTop: 50}}>
-            <Text size={24}>Kontakt</Text>
+        <Card>
+            <p className='text-base'>Kontakt</p>
             <Spacer x={2} />
             <form>
                 <Input placeholder='Name' label='Name' width="300px"></Input>
@@ -19,6 +19,6 @@ export default function Contact() {
                 <Button>Absenden</Button>
             </form>
         </Card>
-    </Container>
+    </div>
   )
 }

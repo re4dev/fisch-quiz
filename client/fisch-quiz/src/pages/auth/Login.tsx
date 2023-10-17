@@ -3,9 +3,7 @@ import {
   Card,
   Spacer,
   Button,
-  Text,
   Input,
-  Container,
 } from '@nextui-org/react';
 import Link from 'next/link';
 import useLogin from '../../../hooks/useLogin';
@@ -27,57 +25,44 @@ export default function Login() {
 
   return (
     <div>
-      <Container
-        display="flex"
-        alignItems="center"
-        justify="center"
-        css={{ minHeight: '100vh' }}
-      >
-        <Card css={{ mw: '420px', p: '20px' }}>
-          <Text
-            size={24}
-            weight="bold"
-            css={{
-              as: 'center',
-              mb: '20px',
-            }}
-          >
+      <div className='justify-center flex content-center'>
+        <Card >
+          <p className=' text-base font-bold mb-20px'>
             Anmelden
-          </Text>
+          </p>
           <Input
-            bordered
-            fullWidth
+            variant="bordered"
             color="primary"
             size="lg"
             placeholder="Benutzername"
             ref={username}
           />
           <Spacer y={1} />
-          <Input.Password
-            bordered
-            fullWidth
+          <Input
+            variant="bordered"
+            type='password'
             color="primary"
             size="lg"
             placeholder="Passwort"
             ref={password}
           />
-          {loginError ? <Text>{loginError}</Text> : <Text>{loginResponse}</Text>}
+          {loginError ? <p>{loginError}</p> : <p>{loginResponse}</p>}
           <Spacer y={4} />
           <Button onClick={handleLogin}>Einloggen</Button>
-          <Container>
+          <div>
             <Link href="/">
               Als Gast fortfahren
             </Link>
-          </Container>
+          </div>
           <Spacer y={5} />
-          <Text h2 css={{ as: "center" }}>Neu hier?</Text>
-          <Container display="flex" alignItems="center" justify="center">
+          <p>Neu hier?</p>
+          <div className='justify-center flex content-center'>
             <Link href="/auth/registrieren" className="font-medium text-indigo-600 hover:text-indigo-500">
               Registrieren
             </Link>
-          </Container>
+          </div>
         </Card>
-      </Container>
+      </div>
     </div>
 
   )
