@@ -1,30 +1,45 @@
-# Project
-[EN] <br />
-At the moment there is only a german version of this app. Its a simple fish quiz where you can see a picture of a fish and have to choose the right name.
+### Description
+The fish quiz is all about guessing the fish in the picture.
 
-[DE] <br />
-Im Moment gibt es nur eine deutsche Version dieser App. Es ist ein einfaches Quiz, wo ein Bild eines Fisches angezeigt wird und man den richtigen Namen auswählen muss.
+### Background
+The project was programmed for a long time and irregularly. There were many ideas in my head that were tried out without a real plan.
+Now that the project is finally ready to go live, some parts have been removed for the time being and will be added back later with care.
 
-# How to
-[EN] <br />
-Simple fish quiz 
+### Aims of the project
+This is a simple version of the Fish Quiz, but it will be expanded and improved over time. 
+The whole project serves as a training ground for me to improve my programming skills.
 
-- Create an account
-- Log in to your account
-- Choose the correct fish name
-- If you choose the wrong fish, it will be added to the 'Incorrect Fish' list.
-- You can add it to your "Favorite Fish" list by clicking the star button.
-- There is no end, it will be repeated each time in a random order.
+### Future extensions
+* Site navigation
+* Changelog
+* Login / Registration (progress tracking)
+* Extension of the number of fish
+* Possibly more fishing related topics
+* Possibly replace the current API
 
-[DE] <br />
-Einfaches Fisch Quiz
+### Technologies
+C#, MSSQL, Docker, Next.js
 
-- Erstelle einen Account
-- Logge dich ein
-- Wähle die richtige Antwort aus
-- Wenn du falsch antwortest, wird der Fisch zu deiner "Falsch beantwortet" Liste hinzugefügt
-- Du kannst Fische zur Favoriten Liste hinzufügen, indem du den Stern anklickst
-- Es gibt kein Ende, es wird immer in einer zufälligen Reihenfolge fortgesetzt
+_______________________________________________________________________________________________________
 
-# Tests
-[![.NET](https://github.com/re4dev/fisch-quiz/actions/workflows/api-build-and-test.yml/badge.svg?branch=main)](https://github.com/re4dev/fisch-quiz/actions/workflows/api-build-and-test.yml)
+### Beschreibung
+Beim FischQuiz geht es lediglich darum, die abgebildeten Fische zu erraten.
+
+### Hintergrund
+Das Projekt wurde lange und unregelmäßig programmiert. Es gab viele Ideen im Kopf, die ohne wirklichen Plan ausprobiert wurden.
+Nachdem das Projekt nun endlich live gehen sollte, wurden sämtliche Teile vorerst wieder entfernt und werden später mit Bedacht eingefügt.
+
+### Ziele des Projektes
+Es handelt sich um eine einfache Version des FischQuiz, die jedoch nach und nach erweitert und verbessert werden soll. 
+Das ganze Projekt dient mir als Übungsfeld, um meine Programmierfähigkeiten zu verbessern.
+
+### Zukünftige Erweiterungen
+- Navigation
+- Changelog
+- Anmeldung / Registrierung (Fortschrittsverfolgung, Karteikartensystem)
+- Erweiterung der Fischanzahl
+- ggf. weitere fischereirelevante Themen
+- ggf. Ablösung der aktuellen API
+
+### Technologien
+C#, MSSQL, Docker, Next.js
