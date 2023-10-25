@@ -8,7 +8,7 @@ const inter = Inter({ subsets: ['latin'] })
 
 export default function Home({ FishData }) {
   return (
-    <div className='flex flex-col min-h-screen'>
+    <div className='flex flex-col min-h-screen bg-white'>
       <Head>
         <title>Fisch-Quiz</title>
         <meta name="description" content="Kennst du alle Fische? Fisch-Quiz lässt es dich wissen." />
