@@ -76,7 +76,10 @@ function Quiz(data) {
   function checkAnswere(e: IFish): void {
     if(e.fishId === randomFishId){
       setAnwereResult("Richtig!");
-      createRandomId();
+
+      setTimeout(() => {
+        createRandomId();
+      }, 1300);
     }
     else {
       setAnwereResult("Falsch! Nächster Versuch.")
@@ -84,50 +87,45 @@ function Quiz(data) {
   }
 
   return (
-    <div className=''>
-      {/* <Navigation></Navigation> */}
+    <div>
 
-      <Spacer y={1} />
-
-      <div className='w-fit mx-auto'>
-        <p className='text-3xl font-semibold'>Welchen Fisch siehst du?</p>
+      <div className='w-fit mx-auto pb-10 pt-4'>
+          <p className='text-2xl lg:text-3xl font-semibold'>Welchen Fisch siehst du?</p>
       </div>
 
-      <Spacer y={3} />
+      <div className='bg-bgBlueColor w-96 sm:w-96 md:w-450px lg:w-450px mx-auto rounded-xl pt-10'>
+        {/* <Navigation></Navigation> */}
 
-      {/* <QuizPlace FishData={FishData}></QuizPlace> */}
-      <div className=''>
-        <div className='flex justify-center'>
-          <div>
-            <Image
-              src={"http://161.97.176.7/fishquiz/" + randomFishId + ".png"}
-              alt="Default Image"
-              className='w-80 rounded-lg m-0'
+        {/* <QuizPlace FishData={FishData}></QuizPlace> */}
+        <div className=''>
+          <div className='flex justify-center'>
+            <div>
+              <Image
+                src={"http://161.97.176.7/fishquiz/" + randomFishId + ".png"}
+                alt="Default Image"
+                className='w-80 rounded-lg m-0'
 
-            />
+              />
+            </div>
+            {/* <div>
+                <Button auto rounded="true" css={{position: "absolute"}}><HeartIcon fill="red" filled height="40" width="40"/></Button>
+                </div> */}
           </div>
-          {/* <div>
-              <Button auto rounded="true" css={{position: "absolute"}}><HeartIcon fill="red" filled height="40" width="40"/></Button>
-              </div> */}
-        </div>
 
-        <div className='w-fit justify-center h-5 mx-auto'>
-          {answereResult ? <div><p className='text-red-600'>{answereResult}</p></div> : <div></div>}
-        </div>
-        
+          <div className='w-fit justify-center h-5 mx-auto pt-10'>
+            {answereResult ? <div><p className={`font-extrabold text-md ${answereResult === 'Richtig!' ? 'text-green-500' : 'text-red-400'}`}>{answereResult}</p></div> : <div></div>}
+          </div>
 
-        <Spacer y={3} />
-
-        <div className='mx-auto w-fit'>
-          <Button className='bg-blue-500 w-64' onPress={() => checkAnswere(allOtherFishes[0])}>{allOtherFishes[0] ? allOtherFishes[0].fishName : ""}</Button>
-          <Spacer y={1} />
-          <Button className='bg-blue-500 w-64' onPress={() => checkAnswere(allOtherFishes[1])}>{allOtherFishes[0] ? allOtherFishes[1].fishName : ""}</Button>
-          <Spacer y={1} />
-          <Button className='bg-blue-500 w-64' onPress={() => checkAnswere(allOtherFishes[2])}>{allOtherFishes[0] ? allOtherFishes[2].fishName : ""}</Button>
-          <Spacer y={1} />
-          <Button className='bg-blue-500 w-64' onPress={() => checkAnswere(allOtherFishes[3])}>{allOtherFishes[0] ? allOtherFishes[3].fishName : ""}</Button>
-          <Spacer y={1}></Spacer>
-          {/* <Button onPress={createRandomId}>Start</Button> */}
+          <div className='mx-auto w-fit pb-20 pt-10'>
+            <Button className='bg-blue-500 w-64 md:w-400px' onPress={() => checkAnswere(allOtherFishes[0])}>{allOtherFishes[0] ? allOtherFishes[0].fishName : ""}</Button>
+            <Spacer y={1} />
+            <Button className='bg-blue-500 w-64 md:w-400px' onPress={() => checkAnswere(allOtherFishes[1])}>{allOtherFishes[0] ? allOtherFishes[1].fishName : ""}</Button>
+            <Spacer y={1} />
+            <Button className='bg-blue-500 w-64 md:w-400px' onPress={() => checkAnswere(allOtherFishes[2])}>{allOtherFishes[0] ? allOtherFishes[2].fishName : ""}</Button>
+            <Spacer y={1} />
+            <Button className='bg-blue-500 w-64 md:w-400px' onPress={() => checkAnswere(allOtherFishes[3])}>{allOtherFishes[0] ? allOtherFishes[3].fishName : ""}</Button>
+            {/* <Button onPress={createRandomId}>Start</Button> */}
+          </div>
         </div>
       </div>
     </div>
