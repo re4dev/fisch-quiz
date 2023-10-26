@@ -2,14 +2,11 @@ FROM node:20-alpine AS build
 
 WORKDIR /app
 
-
-COPY package.json package-lock.json ./
-
-WORKDIR /app/
+COPY ./client/fisch-quiz .
 
 RUN npm install
 
-COPY ./ .
+COPY . .
 
 RUN npm run build
 
