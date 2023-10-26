@@ -2,7 +2,7 @@ FROM node:20-alpine AS build
 
 WORKDIR /app
 
-COPY ./client/fisch-quit/package*.json .
+COPY ./client/fisch-quiz/package*.json .
 
 RUN npm install
 
