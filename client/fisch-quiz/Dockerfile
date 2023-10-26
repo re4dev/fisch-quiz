@@ -3,11 +3,13 @@ FROM node:20-alpine AS build
 WORKDIR /app
 
 
-COPY . .
+COPY package.json package-lock.json ./
+
+WORKDIR /app/
 
 RUN npm install
 
-COPY . .
+COPY ./ .
 
 RUN npm run build
 
