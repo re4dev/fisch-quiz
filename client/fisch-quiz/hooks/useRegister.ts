@@ -26,9 +26,9 @@ export default function useRegister() {
                 setRegisterResponse("Registration successful")
             }
 
-        } catch (error) {
-            console.log(error)
-            setRegisterError(error.message);
+        } catch {
+            console.log("error")
+            setRegisterError("error.message");
         } finally {
             setRegisterIsLoading(false);
         }

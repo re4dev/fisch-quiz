@@ -1,11 +1,11 @@
-import Navigation from '@/components/Navigation'
+'use client'
+
 import { Input, Card, Spacer, Textarea, Button } from '@nextui-org/react'
 import React from 'react'
 
 export default function Contact() {
   return (
     <div className='justify-center flex content-center'>
-        <Navigation></Navigation>
         <Card>
             <p className='text-base'>Kontakt</p>
             <Spacer x={2} />

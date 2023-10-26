@@ -1,3 +1,5 @@
+'use client'
+
 import React, { useRef } from 'react';
 import {
   Card,
@@ -6,8 +8,7 @@ import {
   Input,
 } from '@nextui-org/react';
 import Link from 'next/link';
-import useRegister from '../../../hooks/useRegister';
-import { useRouter } from 'next/router';
+import useRegister from '../../hooks/useRegister';
 
 
 export default function Registrieren() {
@@ -16,14 +17,13 @@ export default function Registrieren() {
   const email = useRef<HTMLInputElement>();
   const password = useRef<HTMLInputElement>();
   const passwordRepeat = useRef<HTMLInputElement>();
-  const router = useRouter();
 
   function handleRegister(){
     const registerUser: IRegisterUser = {
-      username: username.current.value,
-      email: email.current.value,
-      password: password.current.value,
-      passwordRepeat: passwordRepeat.current.value
+      username: "username.current.value",
+      email: "email.current.value",
+      password: "password.current.value",
+      passwordRepeat: "passwordRepeat.current.value"
     }
 
     register(registerUser);
@@ -41,7 +41,7 @@ export default function Registrieren() {
             color="primary"
             size="lg"
             placeholder="Benutzername"
-            ref={username}
+            // ref={username}
           />
           <Spacer y={0.5} />
           <Input
@@ -49,7 +49,7 @@ export default function Registrieren() {
             color="primary"
             size="lg"
             placeholder="E-Mail"
-            ref={email}
+            // ref={email}
           />
           <Spacer y={0.5} />
           <Input
@@ -59,7 +59,7 @@ export default function Registrieren() {
             color="primary"
             size="lg"
             placeholder="Passwort"
-            ref={password}
+            // ref={password}
           />
           <Spacer y={0.5} />
           <Input
@@ -69,7 +69,7 @@ export default function Registrieren() {
             color="primary"
             size="lg"
             placeholder="Passwort wiederholen"
-            ref={passwordRepeat}
+            // ref={passwordRepeat}
           />
           {registerError ? <p>{registerError}</p> : <p>{registerResponse}</p>}
           <Spacer y={3} />
