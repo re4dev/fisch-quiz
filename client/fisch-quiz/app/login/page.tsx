@@ -1,3 +1,5 @@
+'use client'
+
 import React, { useRef } from 'react';
 import {
   Card,
@@ -6,7 +8,7 @@ import {
   Input,
 } from '@nextui-org/react';
 import Link from 'next/link';
-import useLogin from '../../../hooks/useLogin';
+import useLogin from '../../hooks/useLogin';
 
 
 export default function Login() {
@@ -16,8 +18,8 @@ export default function Login() {
 
   function handleLogin(){
     const loginUser: ILoginUser = {
-      username: username.current.value,
-      password: password.current.value,
+      username: "username.current.value",
+      password: "password.current.value",
     }
 
     login(loginUser);
@@ -35,7 +37,7 @@ export default function Login() {
             color="primary"
             size="lg"
             placeholder="Benutzername"
-            ref={username}
+            // ref={username}
           />
           <Spacer y={1} />
           <Input
@@ -44,7 +46,7 @@ export default function Login() {
             color="primary"
             size="lg"
             placeholder="Passwort"
-            ref={password}
+            // ref={password}
           />
           {loginError ? <p>{loginError}</p> : <p>{loginResponse}</p>}
           <Spacer y={4} />

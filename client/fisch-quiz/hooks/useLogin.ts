@@ -26,9 +26,9 @@ export default function useLogin() {
                 setLoginResponse("Login successful")
             }
 
-        } catch (error) {
-            console.log(error)
-            setLoginError(error.message);
+        } catch {
+            console.log("Fehler")
+            setLoginError("fehler");
         } finally {
             setLoginIsLoading(false);
         }

@@ -1,29 +1,31 @@
-import Navigation from '@/components/Navigation'
+'use client'
+
 import { Spacer, Button, Image } from '@nextui-org/react'
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState } from 'react'
+import { Fish } from '@/types/fish';
 
 
-
-
-function Quiz(data) {
+function Quiz(props: { data: Fish[] }) {
+  const { data } = props;
+  console.log(data);
   const [randomFishId, setRandomFishId] = useState<number>();
   var fishId: number;
-  const FishData: IFish[] = data.data;
-  const [allOtherFishes, setAllOtherFishes] = useState<IFish[]>([]);
-  var otherFishes: IFish[] = FishData;
-  var answereFishes: IFish[] = [];
+  const FishData: Fish[] = data;
+  const [allOtherFishes, setAllOtherFishes] = useState<Fish[]>([]);
+  var otherFishes: Fish[] = FishData;
+  var answereFishes: Fish[] = [];
   const [answereResult, setAnwereResult] = useState<string>("");
-
+console.log(data);
   useEffect(() => {
     createRandomId();
   }, [data])
 
 
-  function getRandomFishlist(fishListe: IFish[]) {
+  function getRandomFishlist(fishListe: Fish[]) {
     setAnwereResult("");
     
     // Array zum Speichern der zufälligen Fische
-    let randomFishes: IFish[] = [];
+    let randomFishes: Fish[] = [];
 
     // Zufällige Indizes generieren
     while (randomFishes.length < 3) {
@@ -54,7 +56,10 @@ function Quiz(data) {
     answereFishes = [];
 
     otherFishes = FishData.filter((fish) => fish.fishId !== fishId);
-    answereFishes.push(FishData.find(x => x.fishId === fishId));
+    const foundFish = FishData.find(x => x.fishId === fishId);
+    if (foundFish) {
+        answereFishes.push(foundFish);
+    }
 
     let randomList = getRandomFishlist(otherFishes);
 
@@ -66,14 +71,14 @@ function Quiz(data) {
     setAllOtherFishes(answereFishes);
   }
 
-  function shuffleArray(array: IFish[]) {
+  function shuffleArray(array: Fish[]) {
     for (let i = array.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [array[i], array[j]] = [array[j], array[i]];
     }
   }
 
-  function checkAnswere(e: IFish): void {
+  function checkAnswere(e: Fish): void {
     if(e.fishId === randomFishId){
       setAnwereResult("Richtig!");
 
@@ -90,7 +95,7 @@ function Quiz(data) {
     <div>
 
       <div className='w-fit mx-auto pb-10 pt-4'>
-          <p className='text-2xl lg:text-3xl font-semibold'>Welchen Fisch siehst du?</p>
+          <p className='text-2xl lg:text-3xl font-semibold text-black'>Welchen Fisch siehst du?</p>
       </div>
 
       <div className='bg-bgBlueColor w-96 sm:w-96 md:w-450px lg:w-450px mx-auto rounded-xl pt-10'>
@@ -103,7 +108,7 @@ function Quiz(data) {
               <Image
                 src={"http://161.97.176.7/fishquiz/" + randomFishId + ".png"}
                 alt="Default Image"
-                className='w-80 rounded-lg m-0'
+                className='w-80 rounded-lg m-0 bg-bgBlueColor'
 
               />
             </div>
