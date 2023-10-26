@@ -19,10 +19,6 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Change Working Directory
-        run: cd ./client/fisch-quiz
-        shell: bash
-      
       - name: Build Container
         uses: docker/build-push-action@v4
         with:
