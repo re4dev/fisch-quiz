@@ -25,5 +25,5 @@ jobs:
           context: .
           file: ./client/fisch-quiz/Dockerfile
           push: true
-          tags: qeex/${{ env.ContainerName }}:latest
+          tags: qeex/fischquizui:latest-pip
 
