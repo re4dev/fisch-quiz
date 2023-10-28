@@ -25,4 +25,6 @@ jobs:
           context: ./client/
           push: true
           tags: qeex/fischquizui:latest-pip
+        env:
+          NEXT_PUBLIC_API_URL : ${{ vars.NEXT_PUBLIC_API_URL }}
 
