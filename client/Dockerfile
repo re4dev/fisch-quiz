@@ -17,8 +17,6 @@ RUN \
 
 
 # Rebuild the source code only when needed
-ENV NEXT_PUBLIC_API_URL "http://161.97.176.7:8066/api"
-
 FROM node:20-alpine AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
