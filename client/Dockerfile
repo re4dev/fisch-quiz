@@ -30,10 +30,6 @@ RUN npm run build
 FROM node:20-alpine AS runner
 WORKDIR /app
 
-ARG NEXT_PUBLIC_API_URL
-ENV NEXT_PUBLIC_API_URL "idkman"
-
-
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
