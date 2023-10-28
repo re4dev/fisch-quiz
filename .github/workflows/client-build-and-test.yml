@@ -2,9 +2,6 @@ name: CI/CD
 
 on: 
   push
-      
-env:
-  ContainerName: fishquizfrontend
 
 jobs:
   build-container:
@@ -27,6 +24,6 @@ jobs:
         with:
           context: ./client/
           push: true
-          tags: qeex/fischquizui:latest-pip
+          tags: qeex/fischquizui:latest
           build-args: |
              "NEXT_PUBLIC_API_URL=${{ vars.NEXT_PUBLIC_API_URL }}"
