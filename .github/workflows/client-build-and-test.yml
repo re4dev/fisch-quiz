@@ -26,5 +26,5 @@ jobs:
           push: true
           tags: qeex/fischquizui:latest-pip
           secrets: |
-            NEXT_PUBLIC_API_URL= ${{ secrets.API_URL }}
+            NEXT_PUBLIC_API_URL: ${{ secrets.API_URL }}
 
