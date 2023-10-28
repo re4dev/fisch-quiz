@@ -5,7 +5,7 @@ on:
       
 env:
   ContainerName: fishquizfrontend
-  NEXT_PUBLIC_API_URL: http://161.97.176.7:8066/api
+  NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}"
 
 jobs:
   build-container:
@@ -31,5 +31,5 @@ jobs:
           context: ./client/
           push: true
           tags: qeex/fischquizui:latest-pip
-        env:
-          NEXT_PUBLIC_API_URL: ${{ vars.NEXT_PUBLIC_API_URL }}
+          build-args: |
+            NEXT_PUBLIC_API_URL=${{ secrets.NEXT_PUBLIC_API_URL }}
