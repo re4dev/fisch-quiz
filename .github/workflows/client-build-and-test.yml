@@ -21,10 +21,10 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build Container
+        env:
+          NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
         uses: docker/build-push-action@v5
         with:
           context: ./client/
           push: true
           tags: qeex/fischquizui:latest-pip
-          build-args: |
-            NEXT_PUBLIC_API_URL=${{ secrets.NEXT_PUBLIC_API_URL }}

@@ -15,7 +15,7 @@ export default async function Page() {
 }
 
 async function getData(): Promise<Fish[]>{
-  const url = process.env.NEXT_PUBLIC_API_URL as string;
+  const url: string = process.env.NEXT_PUBLIC_API_URL as string;
   if (!process.env.NEXT_PUBLIC_API_URL) {
     throw new Error('Invalid/Missing environment variable: "NEXT_PUBLIC_API_URL"')
   }
