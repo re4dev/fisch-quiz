@@ -26,5 +26,5 @@ jobs:
           push: true
           tags: name/dat:latest-pip
           build-args: |
-            NEXT_PUBLIC_API_URL: ${{ secrets.API_URL }}
+            process.env.NEXT_PUBLIC_API_URL: ${{ secrets.API_URL }}
 
