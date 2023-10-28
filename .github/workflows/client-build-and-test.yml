@@ -19,12 +19,16 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
+
+      - name: show everything
+        run: echo "some data is ${{ vars.NEXT_PUBLIC_API_URL }}"
+
       - name: Build Container
         uses: docker/build-push-action@v4
         with:
           context: ./client/
           push: true
           tags: qeex/fischquizui:latest-pip
-        env:
-          NEXT_PUBLIC_API_URL : ${{ vars.NEXT_PUBLIC_API_URL }}
+          build-args: |
+            NEXT_PUBLIC_API_URL : ${{ vars.NEXT_PUBLIC_API_URL }}
 
