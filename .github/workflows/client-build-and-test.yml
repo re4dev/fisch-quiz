@@ -1,12 +1,7 @@
 name: CI/CD
 
-on:
-  push:
-    branches:
-      - main
-      
-env:
-  ContainerName: fishquizfrontend
+on: 
+  push
 
 jobs:
   build-container:
@@ -20,12 +15,15 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      
-      - name: Build Container
-        uses: docker/build-push-action@v4
-        with:
-          context: .
-          file: ./client/fisch-quiz/Dockerfile
-          push: true
-          tags: qeex/${{ env.ContainerName }}:latest
+          
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
 
+      - name: Build Container
+        uses: docker/build-push-action@v5
+        with:
+          context: ./client/
+          push: true
+          tags: qeex/fischquizui:latest
+          build-args: |
+             "NEXT_PUBLIC_API_URL=${{ vars.NEXT_PUBLIC_API_URL }}"
