@@ -15,7 +15,7 @@ export default async function Page() {
 }
 
 async function getData(): Promise<Fish[]>{
-  const url = process.env.NEXT_PUBLIC_API_URL;
+  const url = process.env.NEXT_PUBLIC_API_URL as string;
   const res = await fetch(`${url}/Fish`)
   const resp: Fish[] = await res.json();
   return resp;
