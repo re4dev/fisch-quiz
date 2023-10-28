@@ -23,7 +23,7 @@ jobs:
 
 
       - name: show everything
-        run: echo "some data is ${{ secrets.API_URL }}"
+        run: echo "some data is ${{ secrets.NEXT_PUBLIC_API_URL }}"
 
       - name: Build Container
         uses: docker/build-push-action@v5
