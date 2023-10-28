@@ -4,7 +4,7 @@ on:
   push
       
 env:
-  ContainerName: dada
+  ContainerName: fishquizfrontend
 
 jobs:
   build-container:
@@ -21,10 +21,10 @@ jobs:
 
       - name: Build Container
         uses: docker/build-push-action@v4
-        env:
-          NEXT_PUBLIC_API_URL: ${{ secrets.API_URL }}
         with:
           context: ./client/
           push: true
-          tags: name/dat:latest-pip
+          tags: qeex/fischquizui:latest-pip
+          secrets: |
+            NEXT_PUBLIC_API_URL= ${{ secrets.API_URL }}
 
