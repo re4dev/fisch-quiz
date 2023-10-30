@@ -15,7 +15,7 @@ function Footer() {
                     <Link href="/contact">Kontakt</Link>
                 </div>
                 <div className="pr-10 text-textColor">
-                    <Link href="/">Changelog</Link>
+                    <Link href="/changelog">Changelog</Link>
                 </div>
             </div>
             <div className="px-10 text-textColor">

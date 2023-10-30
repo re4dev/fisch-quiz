@@ -6,12 +6,10 @@ import Navigation from "./components/Navigation";
 export default async function Page() {
   const data: Fish[] = await getData();
   return (
-    <div className='flex flex-col min-h-screen bg-white'>
-      <Navigation></Navigation>
+    <div className='bg-white'>
       <main>
         <Quiz data={data}></Quiz>
       </main>
-      <Footer></Footer>
     </div>
   )
 }
