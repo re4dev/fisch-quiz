@@ -1,6 +1,8 @@
 import './globals.css'
 import { Metadata } from 'next'
 import {Providers} from './providers'
+import Footer from './components/Footer'
+import Navigation from './components/Navigation'
 
 export default function RootLayout({
     // Layouts must accept a children prop.
@@ -12,9 +14,13 @@ export default function RootLayout({
     return (
       <html lang="en">
         <body>
+          <div className='min-h-screen flex flex-col'>
+            <Navigation></Navigation>
             <Providers>
                 {children}
             </Providers>
+            <Footer></Footer>
+          </div>
         </body>
       </html>
     )
