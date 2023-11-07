@@ -14,16 +14,16 @@ function Navigation() {
             </NavbarContent>
             <NavbarContent justify='end' className='hidden sm:flex'>
                 <NavbarItem>
-                    <Link color="foreground" href="/" className='font-medium text-lg underline'>
+                    <Link color="foreground" href="/" className='font-medium text-lg'>
                         Alle
                     </Link>
                 </NavbarItem>
-                {/* <NavbarItem>
-                    <Link color="foreground" href="#">
-                        Favoriten
+                <NavbarItem>
+                    <Link color="foreground" href="learning" className='font-medium text-lg'>
+                        Lernen
                     </Link>
                 </NavbarItem>
-                <NavbarItem>
+                {/*<NavbarItem>
                     <Link color="foreground" href="#">
                         Falsche
                     </Link>
@@ -35,6 +35,9 @@ function Navigation() {
             <NavbarMenu className=''>
                 <NavbarMenuItem className='justify-center flex border-b-2'>
                     <Link href='/' className='text-black font-semibold text-xl'>Alle</Link>
+                </NavbarMenuItem>
+                <NavbarMenuItem className='justify-center flex border-b-2'>
+                    <Link href='learning' className='text-black font-semibold text-xl'>Lernen</Link>
                 </NavbarMenuItem>
             </NavbarMenu>
         </Navbar>
