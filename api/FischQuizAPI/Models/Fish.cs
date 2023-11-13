@@ -8,5 +8,8 @@ namespace FischQuizAPI.Models
         public int FishId { get; set; }
         [Required]
         public string FishName { get; set; }
+
+        //navitgations props
+        public ICollection<Characteristic> Characteristics { get; set; }
     }
 }
