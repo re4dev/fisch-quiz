@@ -19,7 +19,7 @@ function Navigation() {
                     </Link>
                 </NavbarItem>
                 <NavbarItem>
-                    <Link color="foreground" href="learning" className='font-medium text-lg'>
+                    <Link color="foreground" href="learning/1" className='font-medium text-lg'>
                         Lernen
                     </Link>
                 </NavbarItem>
