@@ -55,7 +55,7 @@ function Learning(props: { data: Fish[] }){
             </div>
 
             <div className='flex w-fit mx-auto items-center'>
-                <Button className='mr-5' onPress={goBack}>zurück</Button>
+                <Button className='mr-5 hidden sm:inline-flex' onPress={goBack}>zurück</Button>
                 <div className='bg-bgBlueColor w-96 sm:w-96 md:w-450px lg:w-450px mx-auto rounded-xl pt-10'>
                     <div className=''>
                         <div className='flex justify-center'>
@@ -70,12 +70,15 @@ function Learning(props: { data: Fish[] }){
                     </div>
                     <Divider className='bg-gray-100 w-5/6 mx-auto' />
                     <div className='w-fit mx-auto h-52 mt-5'>
-                        {fishData.map((item, index) => <div className='ml-2 mb-2 font-semibold' key={index}>- {item}</div>)}
+                        {fishData.map((item, index) => <div className='ml-2 mb-2 text-sm sm:text-medium font-semibold' key={index}>- {item}</div>)}
                     </div>
                 </div>
-                <Button className='ml-5' onPress={goForward}>weiter</Button>
+                <Button className='ml-5 hidden sm:inline-flex' onPress={goForward}>weiter</Button>
             </div>
-
+            <div className='sm:hidden mt-5 flex mx-auto w-1/2 justify-between'>
+                <Button className='' onPress={goBack}>zurück</Button>
+                <Button className='' onPress={goForward}>weiter</Button>
+            </div>
         </div>
     )
 }
