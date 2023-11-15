@@ -19,7 +19,7 @@ function Navigation() {
                     </Link>
                 </NavbarItem>
                 <NavbarItem>
-                    <Link color="foreground" href="learning/1" className='font-medium text-lg'>
+                    <Link color="foreground" href="/learning/1" className='font-medium text-lg'>
                         Lernen
                     </Link>
                 </NavbarItem>
@@ -37,7 +37,7 @@ function Navigation() {
                     <Link href='/' className='text-black font-semibold text-xl'>Alle</Link>
                 </NavbarMenuItem>
                 <NavbarMenuItem className='justify-center flex border-b-2'>
-                    <Link href='learning' className='text-black font-semibold text-xl'>Lernen</Link>
+                    <Link href='/learning/1' className='text-black font-semibold text-xl'>Lernen</Link>
                 </NavbarMenuItem>
             </NavbarMenu>
         </Navbar>
