@@ -11,7 +11,7 @@ function Learning(props: { data: Fish[] }){
     const params = useParams();
     const fishes: Fish[] = props.data;
     var fishId: number = Number(params.id);
-    var fishIdList = Array.from(Array().keys())
+    var fishIdList = Array.from({ length: fishes.length }, (_, index) => index + 1);
     const [fishData, setFishData] = useState<string[]>([]);
     const [fishName, setFishName] = useState<string>("");
 
@@ -19,12 +19,34 @@ function Learning(props: { data: Fish[] }){
         fetch(`http://161.97.176.7:8066/api/Fish/${fishId}`)
             .then((res) => res.json())
             .then((data) => {
-            setFishData(data)
+            if(data.status == 404){
+                router.push(`/learning/1`)
+            }else{
+                setFishData(data)
+            }
         })
         var name = fishes.find((x) => x.fishId === fishId)?.fishName;
         name != undefined ? setFishName(name) : setFishName("")  ;
     }, [fishId, fishes])
     
+    function goBack(){
+        if(fishId === 1){
+            router.push(`/learning/${fishIdList.length}`)
+        }
+        else {
+            router.push(`/learning/${fishId - 1}`)
+        }
+    }
+
+    function goForward(){
+        if(fishId === fishIdList.length){
+            router.push(`/learning/1`)
+        }
+        else {
+            router.push(`/learning/${fishId + 1}`)
+        }
+    }
+
 
     return (
         <div className=''>
@@ -33,7 +55,7 @@ function Learning(props: { data: Fish[] }){
             </div>
 
             <div className='flex w-fit mx-auto items-center'>
-                <Button className='mr-5' onPress={() => router.push(`/learning/${fishId - 1}`)}>zurück</Button>
+                <Button className='mr-5' onPress={goBack}>zurück</Button>
                 <div className='bg-bgBlueColor w-96 sm:w-96 md:w-450px lg:w-450px mx-auto rounded-xl pt-10'>
                     <div className=''>
                         <div className='flex justify-center'>
@@ -48,10 +70,10 @@ function Learning(props: { data: Fish[] }){
                     </div>
                     <Divider className='bg-gray-100 w-5/6 mx-auto' />
                     <div className='w-fit mx-auto h-52 mt-5'>
-                        {fishData.map((item, index) => <ul key={index}>{item}</ul>)}
+                        {fishData.map((item, index) => <div className='ml-2 mb-2 font-semibold' key={index}>- {item}</div>)}
                     </div>
                 </div>
-                <Button className='ml-5' onPress={() => router.push('/learning/' + (Number(fishId) + 1))}>weiter</Button>
+                <Button className='ml-5' onPress={goForward}>weiter</Button>
             </div>
 
         </div>
