@@ -20,16 +20,17 @@ export default function Beta(props: { version: string }) {
     <div>
       <Card className='bg-slate-100 w-11/12 sm:w-4/6 mx-auto' shadow='md'>
         <CardBody>
-          {changes.map((change) => {
+          {changes.map((change, index) => {
             return (
               <div key={change.date} className='px-5 py-2 mt-2'>
                 <p className='flex justify-end sm:pr-8 font-semibold text-sm sm:text-base'>Datum: {change.date}</p>
-                {change.items.map((item) => {
+                {change.items.map((item, itemIndex) => {
                   return (
-                    <div key={item.title} className='mt-4 mx-auto pl-1 sm:pl-2 py-1'>
-                      <p className='font-semibold text-sm sm:text-base'>- {item.title}</p>
-                      <p className='text-xs font-thin pl-3'>{item.description}</p>
-                    </div>
+                      <div key={item.title} className='mt-4 mx-auto pl-1 sm:pl-2 py-1'>
+                        <p className='font-semibold text-sm sm:text-base'>- {item.title}</p>
+                        <p className='text-xs font-thin pl-3'>{item.description}</p>
+                      </div>
+                      
                   );
                 })}
                 <Divider className='mt-2'></Divider>
@@ -56,11 +57,11 @@ const changesV1 = [
 
 const changesBeta = [
   {
-    date: "29.10.2023",
+    date: "19.11.2023",
     items: [
       {
-        title: "Add navigation to the page",
-        description: "You will now find a navigation bar on each page."
+        title: "Add learning page",
+        description: "Now you can learn the fishes on the learning page. The data is not yet complete."
       },
     ]
   },
@@ -70,6 +71,15 @@ const changesBeta = [
       {
         title: "Add changelog page",
         description: "Now you can find all the changes on the changelog page."
+      },
+    ]
+  },
+  {
+    date: "29.10.2023",
+    items: [
+      {
+        title: "Add navigation to the page",
+        description: "You will now find a navigation bar on each page."
       },
     ]
   },
