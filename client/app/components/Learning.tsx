@@ -54,18 +54,18 @@ function Learning(props: { data: Fish[] }){
                 <p className='text-2xl lg:text-3xl font-semibold text-black'>{fishName}</p>
             </div>
 
+            <p className='mx-auto w-fit text-sm'>Daten werden aktuell noch gefüllt.</p>
+
             <div className='flex w-fit mx-auto items-center'>
                 <Button className='mr-5 hidden sm:inline-flex' onPress={goBack}>zurück</Button>
                 <div className='bg-bgBlueColor w-96 sm:w-96 md:w-450px lg:w-450px mx-auto rounded-xl pt-10'>
-                    <div className=''>
-                        <div className='flex justify-center'>
-                            <div>
-                                <Image
-                                    src={"http://161.97.176.7/fishquiz/" + fishId + ".png"}
-                                    alt="Default Image"
-                                    className='w-80 rounded-lg m-0 bg-bgBlueColor'
-                                />
-                            </div>
+                    <div className='flex justify-center'>
+                        <div>
+                            <Image
+                                src={"http://161.97.176.7/fishquiz/" + fishId + ".png"}
+                                alt="Default Image"
+                                className='w-80 rounded-lg m-0 bg-bgBlueColor'
+                            />
                         </div>
                     </div>
                     <Divider className='bg-gray-100 w-5/6 mx-auto' />
