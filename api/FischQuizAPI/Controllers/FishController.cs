@@ -32,5 +32,28 @@ namespace FischQuizAPI.Controllers
             return Ok(fishes);
         }
 
+        [HttpGet]
+        [Route("{fishId}")]
+        public async Task<ActionResult<IEnumerable<List<string>>>> GetCharacteristics(int fishId)
+        {
+            List<string> ret = new();
+
+            var fish = await _context.Fishes. Include(f => f.Characteristics)
+                .FirstOrDefaultAsync(f => f.FishId == fishId);
+
+            if (fish == null)
+            {
+                return NotFound();
+            }
+
+
+            foreach (var characteristic in fish.Characteristics)
+            {
+                ret.Add(characteristic.Description);
+            }
+
+
+            return Ok(ret);
+        }
     }
 }

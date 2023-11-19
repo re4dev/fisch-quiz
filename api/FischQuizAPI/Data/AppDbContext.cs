@@ -7,8 +7,7 @@ namespace FischQuizAPI.Data
     {
 
         public DbSet<Fish> Fishes { get; set; }
-        public DbSet<User> Users { get; set; }
-        public DbSet<UserFishFavorite> Favorites { get; set; }
+        public DbSet<Characteristic> Characteristics { get; set; }
 
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) {
 
@@ -17,8 +16,11 @@ namespace FischQuizAPI.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<UserFishFavorite>()
-                .HasKey(uf => new { uf.UserId, uf.FishId });
+            modelBuilder.Entity<Fish>()
+                .HasMany<Characteristic>(e => e.Characteristics)
+                .WithOne(e => e.Fish)
+                .HasForeignKey(e => e.FishId)
+                .IsRequired(false);
         }
 
     }
