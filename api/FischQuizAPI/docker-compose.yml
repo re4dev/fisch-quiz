@@ -8,3 +8,5 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8066:80"
+    environment:
+      - SecretKey=${SECRET_KEY}
