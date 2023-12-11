@@ -3,7 +3,7 @@
 import { CaptchaRequest } from '@/types/captchaRequest';
 import { Email } from '@/types/email';
 import { Input, Textarea, Button } from '@nextui-org/react'
-import React, { FormEvent, useEffect, useState } from 'react'
+import React, { FormEvent, useState } from 'react'
 import ReCAPTCHA from 'react-google-recaptcha';
 
 export default function Contact() {
@@ -12,10 +12,6 @@ export default function Contact() {
   const [text, setText] = useState<string>("");
   const [response, setResponse] = useState<string>("");
   const [captcha, setCaptcha] = useState<string | null>();
-
-  useEffect(() => {
-    console.log(process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY);
-  })
 
   const validateEmail = (email: string) => email.match(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i);
 
