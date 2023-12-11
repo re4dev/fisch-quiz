@@ -28,7 +28,7 @@ export default function Contact() {
 
     if(captcha){
       try {
-        const url: string = process.env.NEXT_PUBLIC_API_URL_LOCAL as string;
+        const url: string = process.env.NEXT_PUBLIC_API_URL as string;
         const res = await fetch(`${url}/mail/verify`, {
           method: "POST",
           headers: {'Content-Type': 'application/json'},
@@ -39,7 +39,7 @@ export default function Contact() {
       }
 
       try {
-        const url: string = process.env.NEXT_PUBLIC_API_URL_LOCAL as string;
+        const url: string = process.env.NEXT_PUBLIC_API_URL as string;
         const res = await fetch(`${url}/mail/send`, {
           method: "POST",
           headers: {'Content-Type': 'application/json'},
