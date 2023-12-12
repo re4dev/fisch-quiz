@@ -67,14 +67,14 @@ export default function Contact() {
       <div className='w-fit pb-10 mx-auto pt-4'>
           <p className='text-2xl lg:text-3xl font-semibold text-black'>Kontakt</p>
       </div>
-      <div className='w-2/4 mx-auto'>
+      <div className='w-3/4 md:w-2/4 mx-auto'>
         <form onSubmit={sendMail}>
             <Input type='text' placeholder='Name' label='Name' width="300px" className='mb-5' isRequired value={name} onValueChange={setName}></Input>
             <Input type='email' placeholder='E-Mail' label='E-Mail' width="300px" className='mb-5' isRequired value={email} onValueChange={setEmail} isInvalid={isInvalid}></Input>
             <Textarea type='text' placeholder='Text' label='Beschreibung' fullWidth isRequired value={text} onValueChange={setText} ></Textarea>
-            <div className='flex justify-between align-middle h-15 mt-2'>
+            <div className='md:flex justify-between align-middle h-15 mt-2'>
               <ReCAPTCHA ref={recaptchaRef} sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!} onChange={setCaptcha}></ReCAPTCHA>
-              <Button  type='submit' className="h-10 my-auto" disabled={(email != "" && name != "" && text != "" && captcha != null && !isInvalid) ? false : true}>Absenden</Button>
+              <Button  type='submit' className="h-10 my-auto mt-2 md:mt-0" disabled={(email != "" && name != "" && text != "" && captcha != null && !isInvalid) ? false : true}>Absenden</Button>
             </div>
         </form>
         <div className="h-5 mt-2">
