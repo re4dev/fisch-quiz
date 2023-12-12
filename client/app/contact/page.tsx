@@ -3,7 +3,7 @@
 import { CaptchaRequest } from '@/types/captchaRequest';
 import { Email } from '@/types/email';
 import { Input, Textarea, Button } from '@nextui-org/react'
-import React, { FormEvent, useState } from 'react'
+import React, { FormEvent, useRef, useState } from 'react'
 import ReCAPTCHA from 'react-google-recaptcha';
 
 export default function Contact() {
@@ -12,6 +12,7 @@ export default function Contact() {
   const [text, setText] = useState<string>("");
   const [response, setResponse] = useState<string>("");
   const [captcha, setCaptcha] = useState<string | null>();
+  const recaptchaRef = useRef<ReCAPTCHA | null>(null);
 
   const validateEmail = (email: string) => email.match(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i);
 
@@ -46,6 +47,12 @@ export default function Contact() {
           body: JSON.stringify(fullMail)
         });
         setResponse("Mail erfolgreich versendet.");
+
+        if (recaptchaRef.current) {
+          recaptchaRef.current.reset();
+        }
+        setCaptcha(null);
+
       } catch(err) {
         setResponse("Fehler beim versenden.");
       }
@@ -66,7 +73,7 @@ export default function Contact() {
             <Input type='email' placeholder='E-Mail' label='E-Mail' width="300px" className='mb-5' isRequired value={email} onValueChange={setEmail} isInvalid={isInvalid}></Input>
             <Textarea type='text' placeholder='Text' label='Beschreibung' fullWidth isRequired value={text} onValueChange={setText} ></Textarea>
             <div className='flex justify-between align-middle h-15 mt-2'>
-              <ReCAPTCHA sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!} onChange={setCaptcha}></ReCAPTCHA>
+              <ReCAPTCHA ref={recaptchaRef} sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!} onChange={setCaptcha}></ReCAPTCHA>
               <Button  type='submit' className="h-10 my-auto" disabled={(email != "" && name != "" && text != "" && captcha != null && !isInvalid) ? false : true}>Absenden</Button>
             </div>
         </form>
