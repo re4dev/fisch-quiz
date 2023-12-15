@@ -1,9 +1,34 @@
 'use client'
 
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Navbar, Link, NavbarContent, NavbarItem, NavbarBrand, NavbarMenuToggle, NavbarMenu, NavbarMenuItem } from "@nextui-org/react";
-
+import { User, createClientComponentClient } from '@supabase/auth-helpers-nextjs';
+import { useRouter } from 'next/navigation';
 function Navigation() {
+    const [user, setUser] = useState<User | null>(null);
+    const [loading, setLoading] = useState(true);
+    const supabase = createClientComponentClient();
+    const router = useRouter();
+
+    useEffect(() => {
+        async function getUser(){
+          const {data: {user}} = await supabase.auth.getUser();
+          setUser(user);
+        }
+        getUser();
+        setLoading(false);
+      }, [])
+
+      const handleSignOut = async () => {
+        const res = await supabase.auth.signOut();
+        setUser(null);
+        router.refresh();
+      }
+    
+      if (loading) {
+        return <div>Loading...</div>;
+      }
+
     return (
         <Navbar isBordered position="static" className='bg-gray-100'>
             <NavbarBrand className=''>
@@ -13,6 +38,15 @@ function Navigation() {
                 <h1 className='font-semibold text-2xl text-center invisible sm:visible'>Fisch-Quiz</h1>
             </NavbarContent>
             <NavbarContent justify='end' className='hidden sm:flex'>
+                {user ? 
+                    <NavbarMenuItem>
+                        <Link className='font-medium text-lg' onClick={handleSignOut}>logout</Link>
+                    </NavbarMenuItem>
+                    :
+                    <NavbarMenuItem>
+                        <Link href='/login' className='font-medium text-lg'>login</Link>
+                    </NavbarMenuItem>
+                }
                 <NavbarItem>
                     <Link color="foreground" href="/" className='font-medium text-lg'>
                         Alle
@@ -23,11 +57,6 @@ function Navigation() {
                         Lernen
                     </Link>
                 </NavbarItem>
-                {/*<NavbarItem>
-                    <Link color="foreground" href="#">
-                        Falsche
-                    </Link>
-                </NavbarItem> */}
             </NavbarContent>
             <NavbarMenuToggle
                 className="sm:hidden"
@@ -42,6 +71,7 @@ function Navigation() {
             </NavbarMenu>
         </Navbar>
     )
+
 }
 
 export default Navigation
