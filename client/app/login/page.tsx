@@ -1,28 +1,55 @@
 'use client'
 
-import React, { useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   Card,
-  Spacer,
   Button,
   Input,
 } from '@nextui-org/react';
-import Link from 'next/link';
-import useLogin from '../../hooks/useLogin';
+import { User, createClientComponentClient } from '@supabase/auth-helpers-nextjs';
+import { useRouter } from 'next/navigation';
 
 
 export default function Login() {
-  const { login, loginResponse, loginError, loginIsLoading } = useLogin();
-  const username = useRef<HTMLInputElement>();
-  const password = useRef<HTMLInputElement>();
+  const [password, setPassword] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [user, setUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const router = useRouter();
 
-  function handleLogin(){
-    const loginUser: ILoginUser = {
-      username: "username.current.value",
-      password: "password.current.value",
+  const supabase = createClientComponentClient();
+
+  useEffect(() => {
+    async function getUser(){
+      const {data: {user}} = await supabase.auth.getUser();
+      setUser(user);
+      setLoading(false);
     }
+    getUser();
+  }, [])
 
-    login(loginUser);
+  const handleSignUp = async () => {
+    await supabase.auth.signUp({email, password, options: {
+      emailRedirectTo: `${location.origin}/auth/callback`
+    }})
+    router.refresh();
+    setEmail("");
+    setPassword("");
+  }
+
+  const handleSignIn = async () => {
+    const res = await supabase.auth.signInWithPassword({email, password});
+    const usr = res.data.user;
+    setUser(usr);
+    if(usr){
+      router.push("/");
+    }
+    setEmail("");
+    setPassword("");
+  }
+
+  if(loading) {
+    return <h1>loading..</h1>
   }
 
   return (
@@ -33,36 +60,33 @@ export default function Login() {
             Anmelden
           </p>
           <Input
+            type='email'
             variant="bordered"
             color="primary"
             size="lg"
             placeholder="Benutzername"
-            // ref={username}
+            value={email}
+            onValueChange={setEmail}
           />
-          <Spacer y={1} />
           <Input
             variant="bordered"
             type='password'
             color="primary"
             size="lg"
             placeholder="Passwort"
-            // ref={password}
+            value={password}
+            onValueChange={setPassword}
           />
-          {loginError ? <p>{loginError}</p> : <p>{loginResponse}</p>}
-          <Spacer y={4} />
-          <Button onClick={handleLogin}>Einloggen</Button>
-          <div>
-            <Link href="/">
-              Als Gast fortfahren
-            </Link>
-          </div>
-          <Spacer y={5} />
-          <p>Neu hier?</p>
+
+          <Button onClick={handleSignIn}>Einloggen</Button>
+          <Button onClick={handleSignUp}>Registrieren</Button>
+
+           {/* <p>Neu hier?</p>
           <div className='justify-center flex content-center'>
             <Link href="/auth/registrieren" className="font-medium text-indigo-600 hover:text-indigo-500">
               Registrieren
             </Link>
-          </div>
+          </div> */}
         </Card>
       </div>
     </div>
