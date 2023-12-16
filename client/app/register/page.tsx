@@ -1,92 +1,64 @@
 'use client'
 
-import React, { useRef } from 'react';
+import React, { useState } from 'react';
 import {
-  Card,
-  Spacer,
   Button,
   Input,
+  Link,
 } from '@nextui-org/react';
-import Link from 'next/link';
-import useRegister from '../../hooks/useRegister';
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
+import { useRouter } from 'next/navigation';
+
 
 
 export default function Registrieren() {
-  const { register, registerResponse, registerError, registerIsLoading } = useRegister();
-  const username = useRef<HTMLInputElement>();
-  const email = useRef<HTMLInputElement>();
-  const password = useRef<HTMLInputElement>();
-  const passwordRepeat = useRef<HTMLInputElement>();
+  const [password, setPassword] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const router = useRouter();
 
-  function handleRegister(){
-    const registerUser: IRegisterUser = {
-      username: "username.current.value",
-      email: "email.current.value",
-      password: "password.current.value",
-      passwordRepeat: "passwordRepeat.current.value"
+  const supabase = createClientComponentClient();
+
+  const handleSignUp = async () => {
+    const user = await supabase.auth.signUp({email, password, options: {
+      emailRedirectTo: `${location.origin}/auth/callback`
+    }})
+    if(user){
+      router.push("/login");
     }
-
-    register(registerUser);
+    setEmail("");
+    setPassword("");
   }
 
   return (
-    <div>
-      <div className='justify-center flex content-center'>
-        <Card>
-          <p className=' text-base font-bold mb-20px'>
-            Registrieren
-          </p>
+    <div className='p-6 h-64 w-96 mx-auto mt-20'>
+      <div className='bg-gray-100 p-8 rounded-lg shadow-md w-96'>
           <Input
-             variant="bordered"
-            color="primary"
-            size="lg"
-            placeholder="Benutzername"
-            // ref={username}
-          />
-          <Spacer y={0.5} />
-          <Input
+            type='email'
             variant="bordered"
-            color="primary"
             size="lg"
             placeholder="E-Mail"
-            // ref={email}
+            value={email}
+            onValueChange={setEmail}
+            className='mb-3'
           />
-          <Spacer y={0.5} />
           <Input
-            type='password'
             variant="bordered"
-            fullWidth
-            color="primary"
+            type='password'
             size="lg"
             placeholder="Passwort"
-            // ref={password}
+            value={password}
+            onValueChange={setPassword}
+            className=''
           />
-          <Spacer y={0.5} />
-          <Input
-            type='password'
-            variant="bordered"
-            fullWidth
-            color="primary"
-            size="lg"
-            placeholder="Passwort wiederholen"
-            // ref={passwordRepeat}
-          />
-          {registerError ? <p>{registerError}</p> : <p>{registerResponse}</p>}
-          <Spacer y={3} />
-          <Button onClick={handleRegister}>Registrieren</Button>
-          <div>
-            <Link href="/">
-              Als Gast fortfahren
+
+          <Button onClick={handleSignUp} className='w-auto mx-auto mt-2 mb-4'>Registrieren</Button>
+
+          <p className='p-0 m-0 text-black'>Bereits ein Konto?</p>
+          <div className=''>
+            <Link href="/login" className="p-0 m-0 text-xs align-top text-black">
+              Login
             </Link>
           </div>
-          <Spacer y={5} />
-          <p>Bereits ein Konto?</p>
-          <div className='justify-center flex content-center'>
-            <Link href="/auth/login">
-              Anmelden
-            </Link>
-          </div>
-        </Card>
       </div>
     </div>
 
