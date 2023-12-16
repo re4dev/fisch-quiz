@@ -28,15 +28,6 @@ export default function Login() {
     getUser();
   }, [])
 
-  const handleSignUp = async () => {
-    await supabase.auth.signUp({email, password, options: {
-      emailRedirectTo: `${location.origin}/auth/callback`
-    }})
-    router.refresh();
-    setEmail("");
-    setPassword("");
-  }
-
   const handleSignIn = async () => {
     const res = await supabase.auth.signInWithPassword({email, password});
     const usr = res.data.user;
