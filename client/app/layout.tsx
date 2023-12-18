@@ -3,6 +3,8 @@ import { Metadata } from 'next'
 import {Providers} from './providers'
 import Footer from './components/Footer'
 import Navigation from './components/Navigation'
+import { User } from '@supabase/auth-helpers-nextjs'
+import { UserContext } from './contexts/UserContext'
 
 export default function RootLayout({
     // Layouts must accept a children prop.
@@ -15,9 +17,9 @@ export default function RootLayout({
       <html lang="en">
         <body>
           <div className='min-h-screen flex flex-col'>
-            <Navigation></Navigation>
             <Providers>
-                {children}
+              <Navigation></Navigation>
+                {children} 
             </Providers>
             <Footer></Footer>
           </div>

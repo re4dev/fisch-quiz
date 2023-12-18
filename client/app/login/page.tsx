@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import {
   Button,
   Input,
@@ -8,6 +8,7 @@ import {
 } from '@nextui-org/react';
 import { User, createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import { useRouter } from 'next/navigation';
+import { UserContext } from '../contexts/UserContext';
 
 
 export default function Login() {
@@ -16,6 +17,7 @@ export default function Login() {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const router = useRouter();
+  const authUserContext = useContext(UserContext);
 
   const supabase = createClientComponentClient();
 
@@ -32,6 +34,8 @@ export default function Login() {
     const res = await supabase.auth.signInWithPassword({email, password});
     const usr = res.data.user;
     setUser(usr);
+    authUserContext.setUserLoggedIn(true);
+    console.log(usr);
     if(usr){
       router.push("/");
     }
