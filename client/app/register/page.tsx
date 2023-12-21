@@ -14,6 +14,7 @@ import { useRouter } from 'next/navigation';
 export default function Registrieren() {
   const [password, setPassword] = useState<string>("");
   const [email, setEmail] = useState<string>("");
+  const [response, setResponse] = useState<string>("");
   const router = useRouter();
 
   const supabase = createClientComponentClient();
@@ -22,7 +23,12 @@ export default function Registrieren() {
     const user = await supabase.auth.signUp({email, password, options: {
       emailRedirectTo: `${location.origin}/auth/callback`
     }})
-    if(user){
+    console.log(user);
+    if(user.error?.message){
+      setResponse(user.error?.message)
+    }
+    if(user && !user.error?.message){
+      setResponse("Registrierung erfolgreich.")
       router.push("/login");
     }
     setEmail("");
@@ -51,7 +57,9 @@ export default function Registrieren() {
             className=''
           />
 
-          <Button onClick={handleSignUp} className='w-auto mx-auto mt-2 mb-4'>Registrieren</Button>
+          <div className=' h-5 ml-1 text-red-400 text-xs'>{response}</div>
+
+          <Button onClick={handleSignUp} className='w-auto mx-auto mt-3 mb-4'>Registrieren</Button>
 
           <p className='p-0 m-0 text-black'>Bereits ein Konto?</p>
           <div className=''>
