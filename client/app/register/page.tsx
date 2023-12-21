@@ -30,7 +30,7 @@ export default function Registrieren() {
   }
 
   return (
-    <div className='p-6 h-64 w-96 mx-auto mt-20'>
+    <div className='h-64 w-96 mx-auto mt-20'>
       <div className='bg-gray-100 p-8 rounded-lg shadow-md w-96'>
           <Input
             type='email'
