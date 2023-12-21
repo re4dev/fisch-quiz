@@ -7,7 +7,6 @@ import { Fish } from '@/types/fish';
 
 function Quiz(props: { data: Fish[] }) {
   const { data } = props;
-  console.log(data);
   const [randomFishId, setRandomFishId] = useState<number>();
   var fishId: number;
   const FishData: Fish[] = data;
@@ -15,7 +14,6 @@ function Quiz(props: { data: Fish[] }) {
   var otherFishes: Fish[] = FishData;
   var answereFishes: Fish[] = [];
   const [answereResult, setAnwereResult] = useState<string>("");
-console.log(data);
   useEffect(() => {
     createRandomId();
   }, [data])

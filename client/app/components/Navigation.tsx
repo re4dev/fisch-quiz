@@ -1,9 +1,33 @@
 'use client'
 
-import React from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Navbar, Link, NavbarContent, NavbarItem, NavbarBrand, NavbarMenuToggle, NavbarMenu, NavbarMenuItem } from "@nextui-org/react";
-
+import { User, createClientComponentClient } from '@supabase/auth-helpers-nextjs';
+import { useRouter } from 'next/navigation';
+import { UserContext } from '../contexts/UserContext';
 function Navigation() {
+    const [user, setUser] = useState<User | null>(null);
+    const supabase = createClientComponentClient();
+    const router = useRouter();
+    const authUserContext = useContext(UserContext);
+
+    useEffect(() => {
+        async function getUser(){
+          const {data: {user}} = await supabase.auth.getUser();
+          setUser(user);
+        }
+        getUser();
+      }, [])
+
+      const handleSignOut = async () => {
+        const res = await supabase.auth.signOut();
+        if(res.error == null){
+            setUser(null);
+            authUserContext?.setUserLoggedIn(false);
+            router.refresh();
+        }
+      }
+
     return (
         <Navbar isBordered position="static" className='bg-gray-100'>
             <NavbarBrand className=''>
@@ -14,20 +38,24 @@ function Navigation() {
             </NavbarContent>
             <NavbarContent justify='end' className='hidden sm:flex'>
                 <NavbarItem>
-                    <Link color="foreground" href="/" className='font-medium text-lg'>
-                        Alle
-                    </Link>
+                    <p color="foreground" onClick={() => router.push("/")} className='font-medium text-lg'>
+                    Alle
+                    </p>
                 </NavbarItem>
                 <NavbarItem>
-                    <Link color="foreground" href="/learning/1" className='font-medium text-lg'>
+                    <p color="foreground" onClick={() => router.push("/learning/1")} className='font-medium text-lg'>
                         Lernen
-                    </Link>
+                    </p>
                 </NavbarItem>
-                {/*<NavbarItem>
-                    <Link color="foreground" href="#">
-                        Falsche
-                    </Link>
-                </NavbarItem> */}
+                {authUserContext?.userLoggedIn ? 
+                    <NavbarMenuItem>
+                        <Link className='font-medium text-lg' onClick={handleSignOut}>logout</Link>
+                    </NavbarMenuItem>
+                    :
+                    <NavbarMenuItem>
+                        <Link href='/login' className='font-medium text-lg'>login</Link>
+                    </NavbarMenuItem>
+                }
             </NavbarContent>
             <NavbarMenuToggle
                 className="sm:hidden"
@@ -42,6 +70,7 @@ function Navigation() {
             </NavbarMenu>
         </Navbar>
     )
+
 }
 
 export default Navigation
