@@ -21,9 +21,11 @@ function Navigation() {
 
       const handleSignOut = async () => {
         const res = await supabase.auth.signOut();
-        setUser(null);
-        authUserContext.setUserLoggedIn(false);
-        router.refresh();
+        if(res.error == null){
+            setUser(null);
+            authUserContext?.setUserLoggedIn(false);
+            router.refresh();
+        }
       }
 
     return (
@@ -36,16 +38,16 @@ function Navigation() {
             </NavbarContent>
             <NavbarContent justify='end' className='hidden sm:flex'>
                 <NavbarItem>
-                    <Link color="foreground" href="/" className='font-medium text-lg'>
-                        Alle
-                    </Link>
+                    <p color="foreground" onClick={() => router.push("/")} className='font-medium text-lg'>
+                    Alle
+                    </p>
                 </NavbarItem>
                 <NavbarItem>
-                    <Link color="foreground" href="/learning/1" className='font-medium text-lg'>
+                    <p color="foreground" onClick={() => router.push("/learning/1")} className='font-medium text-lg'>
                         Lernen
-                    </Link>
+                    </p>
                 </NavbarItem>
-                {authUserContext.userLoggedIn ? 
+                {authUserContext?.userLoggedIn ? 
                     <NavbarMenuItem>
                         <Link className='font-medium text-lg' onClick={handleSignOut}>logout</Link>
                     </NavbarMenuItem>

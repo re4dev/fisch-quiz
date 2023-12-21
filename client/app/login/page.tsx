@@ -14,8 +14,9 @@ import { UserContext } from '../contexts/UserContext';
 export default function Login() {
   const [password, setPassword] = useState<string>("");
   const [email, setEmail] = useState<string>("");
-  const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
+  const [user, setUser] = useState<User | null>(null);
+  const [response, setResponse] = useState<string>();
   const router = useRouter();
   const authUserContext = useContext(UserContext);
 
@@ -28,13 +29,17 @@ export default function Login() {
       setLoading(false);
     }
     getUser();
+    if(user){
+      router.push("/");
+    }
   }, [])
 
   const handleSignIn = async () => {
     const res = await supabase.auth.signInWithPassword({email, password});
+    console.log(res);
+    setResponse(res.error?.message)
     const usr = res.data.user;
-    setUser(usr);
-    authUserContext.setUserLoggedIn(true);
+    authUserContext?.setUserLoggedIn(true);
     console.log(usr);
     if(usr){
       router.push("/");
@@ -68,7 +73,7 @@ export default function Login() {
             onValueChange={setPassword}
             className=''
           />
-
+          <div className=' h-5 ml-1 text-red-400'>{response}</div>
           <Button onClick={handleSignIn} className='w-auto mx-auto mt-2 mb-4'>Einloggen</Button>
 
           <p className='p-0 m-0 text-black'>Neu hier?</p>
