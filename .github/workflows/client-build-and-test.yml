@@ -27,7 +27,8 @@ jobs:
           context: ./client/
           push: true
           tags: qeex/fischquizui:latest
+          secrets: |
+            NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+            NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
           build-args: |
              NEXT_PUBLIC_API_URL=${{ vars.NEXT_PUBLIC_API_URL }}
-             NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
-             NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
