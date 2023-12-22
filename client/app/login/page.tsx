@@ -15,7 +15,6 @@ export default function Login() {
   const [password, setPassword] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(true);
-  const [user, setUser] = useState<User | null>(null);
   const [response, setResponse] = useState<string>();
   const router = useRouter();
   const authUserContext = useContext(UserContext);
@@ -25,13 +24,12 @@ export default function Login() {
   useEffect(() => {
     async function getUser(){
       const {data: {user}} = await supabase.auth.getUser();
-      setUser(user);
       setLoading(false);
+      if(user){
+        router.push("/");
+      }
     }
     getUser();
-    if(user){
-      router.push("/");
-    }
   }, [])
 
   const handleSignIn = async () => {
