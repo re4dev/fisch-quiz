@@ -36,16 +36,14 @@ export default function Login() {
 
   const handleSignIn = async () => {
     const res = await supabase.auth.signInWithPassword({email, password});
-    console.log(res);
     setResponse(res.error?.message)
     const usr = res.data.user;
-    authUserContext?.setUserLoggedIn(true);
-    console.log(usr);
     if(usr){
       router.push("/");
+      authUserContext?.setUserLoggedIn(true);
+      setEmail("");
+      setPassword("");
     }
-    setEmail("");
-    setPassword("");
   }
 
   async function signInWithGithub() {
