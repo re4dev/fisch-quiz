@@ -38,22 +38,22 @@ function Navigation() {
             </NavbarContent>
             <NavbarContent justify='end' className='hidden sm:flex'>
                 <NavbarItem>
-                    <p color="foreground" onClick={() => router.push("/")} className='font-medium text-lg'>
+                    <p color="foreground" onClick={() => router.push("/")} className='font-medium text-lg cursor-pointer'>
                     Alle
                     </p>
                 </NavbarItem>
                 <NavbarItem>
-                    <p color="foreground" onClick={() => router.push("/learning/1")} className='font-medium text-lg'>
+                    <p color="foreground" onClick={() => router.push("/learning/1")} className='font-medium text-lg cursor-pointer'>
                         Lernen
                     </p>
                 </NavbarItem>
                 {authUserContext?.userLoggedIn ? 
                     <NavbarMenuItem>
-                        <Link className='font-medium text-lg' onClick={handleSignOut}>logout</Link>
+                        <Link className='font-medium text-lg cursor-pointer' onClick={handleSignOut}>logout</Link>
                     </NavbarMenuItem>
                     :
                     <NavbarMenuItem>
-                        <Link href='/login' className='font-medium text-lg'>login</Link>
+                        <Link href='/login' className='font-medium text-lg cursor-pointer'>login</Link>
                     </NavbarMenuItem>
                 }
             </NavbarContent>
@@ -62,11 +62,20 @@ function Navigation() {
                 />
             <NavbarMenu className=''>
                 <NavbarMenuItem className='justify-center flex border-b-2'>
-                    <Link href='/' className='text-black font-semibold text-xl'>Alle</Link>
+                    <a href='/' className='text-black font-semibold text-xl'>Alle</a>
                 </NavbarMenuItem>
                 <NavbarMenuItem className='justify-center flex border-b-2'>
-                    <Link href='/learning/1' className='text-black font-semibold text-xl'>Lernen</Link>
+                    <a href='/learning/1' className='text-black font-semibold text-xl'>Lernen</a>
                 </NavbarMenuItem>
+                {authUserContext?.userLoggedIn ? 
+                    <NavbarMenuItem className='justify-center flex border-b-2'>
+                        <Link className='font-semibold text-xl' onClick={handleSignOut}>logout</Link>
+                    </NavbarMenuItem>
+                    :
+                    <NavbarMenuItem className='justify-center flex border-b-2 mt-4'>
+                        <Link href='/login' className='font-semibold text-xl'>login</Link>
+                    </NavbarMenuItem>
+                }
             </NavbarMenu>
         </Navbar>
     )
